@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class StatsComponent
-{
+public class StatsComponent : MonoBehaviour {
+
     public int maxHP = 0;
     public int attack = 0;
     public int defense = 0;

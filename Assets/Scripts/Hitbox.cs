@@ -12,6 +12,11 @@ public class HitboxScript : MonoBehaviour
         if ( hurtboxLayer == (hurtboxLayer | (1 << other.transform.gameObject.layer))) // Check if the collided object is in the hurtbox layer
         {
             HurtboxScript hurtbox = other.GetComponent<HurtboxScript>(); // Try to get the Hurtbox component from the collided object
+            var react = other.GetComponentInParent<SolarisHitReacts>();
+            if (react != null)
+            {
+                react.OnHit();
+            }
 
             if (hurtbox != null) 
             {
