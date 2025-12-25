@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int maxHealth = 50;  // Maximum health
+    public int maxHealth;  // Maximum health
     public int currentHealth;    // Current health
     private bool isDead = false; // Flag to check if the player is dead
 
@@ -18,7 +18,8 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            playerDied(); // Call playerDied method if health drops to zero or below
+            Destroy(gameObject); // Destroy the player GameObject if health drops to zero or below
+            //playerDied(); // Call playerDied method if health drops to zero or below
         }
     }
 

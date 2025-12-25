@@ -292,6 +292,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 7826482052143757231, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
+      propertyPath: currentHealth
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7937510514826294118, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
       propertyPath: hitboxPrefab
       value: 
@@ -581,6 +585,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6403924157993705792, guid: ada20cefc411d7c48a13055dbf7f5e8c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6502427178665273760, guid: ada20cefc411d7c48a13055dbf7f5e8c, type: 3}
+      propertyPath: currentHealth
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
