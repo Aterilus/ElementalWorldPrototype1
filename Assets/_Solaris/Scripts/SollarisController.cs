@@ -18,7 +18,21 @@ public class SollarisController : MonoBehaviour
 
     void Update()
     {
-        if(playerTransform == null || teleportPoints.Length == 0)
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            Debug.Log("TEST: Y pressed - trying to fire dagger");
+
+            var daggers = GetComponent<SolarisDaggers>();
+            if (daggers == null)
+            {
+                Debug.LogError("SolarisDaggers NOT found on this object");
+            }
+            else
+            {
+                daggers.TryFire(playerTransform);
+            }
+        }
+        if (playerTransform == null || teleportPoints.Length == 0)
             return;
 
         //if (!isAttacking)
@@ -53,6 +67,12 @@ public class SollarisController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         isAttacking = false;
+
+        SolarisDaggers daggers = GetComponent<SolarisDaggers>();
+        if (daggers != null)
+        {
+            daggers.TryFire(playerTransform);
+        }
     }
 
     void TeleportToRandomPoint()

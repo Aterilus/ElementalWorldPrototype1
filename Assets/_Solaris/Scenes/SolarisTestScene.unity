@@ -474,7 +474,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298549305}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &298549307
 Camera:
   m_ObjectHideFlags: 0
@@ -585,6 +585,53 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &371950247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 371950248}
+  - component: {fileID: 371950249}
+  m_Layer: 0
+  m_Name: DaggerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &371950248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371950247}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1937398058}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &371950249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371950247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a4f6699f02dce9418600eb141cc9c88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 12
+  damage: 5
+  lifetime: 5
 --- !u!1 &473444774
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,7 +1007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2157255695173190118, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 2157255695173190118, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1001,6 +1048,10 @@ PrefabInstance:
     - target: {fileID: 6514479583167794120, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663884656229214811, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7826482052143757231, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
       propertyPath: m_Enabled
@@ -1265,6 +1316,7 @@ GameObject:
   - component: {fileID: 1937398058}
   - component: {fileID: 1937398059}
   - component: {fileID: 1937398060}
+  - component: {fileID: 1937398061}
   m_Layer: 0
   m_Name: Solaris
   m_TagString: Untagged
@@ -1286,6 +1338,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 473444775}
+  - {fileID: 371950248}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1937398059
@@ -1322,9 +1375,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flareMarkerPrefab: {fileID: 4729578939003145138, guid: f6edaced434fee84c8e3e4b61a9c3b01, type: 3}
+  flareDamagePrefab: {fileID: 5669379214211971024, guid: 0376d04f3178e4041b3efe77de0dd38f, type: 3}
   warningDuration: 1.5
+  damageDuration: 0.5
   flareCount: 3
   radius: 6
+--- !u!114 &1937398061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937398057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a99accd0bda1d56459cbacda5fb0fd64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  daggerPrefab: {fileID: 6445681142992048690, guid: ff01a2ed41e45684fa60cd16b131a4fd, type: 3}
+  daggerSpawnPoint: {fileID: 371950248}
+  daggerCooldown: 4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
