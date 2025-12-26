@@ -17,6 +17,8 @@ public class SolarisLookAt : MonoBehaviour
         {
             return; // Avoid zero-length direction
         }
+
+        
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
