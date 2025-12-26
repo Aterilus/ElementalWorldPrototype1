@@ -37,6 +37,17 @@ public class SolarisDaggers : MonoBehaviour
 
         GameObject daggerInstance = Instantiate(daggerPrefab, daggerSpawnPoint.position, daggerSpawnPoint.rotation);
 
+        DaggerProjectile daggerProjectile = daggerInstance.GetComponent<DaggerProjectile>();
+        if (daggerProjectile != null)
+        {
+            daggerProjectile.SetTarget(player);
+            Debug.Log("Dagger projectile target set to player");
+        }
+        else
+        {
+            Debug.LogError("DaggerPrefab does not have a DaggerProjectile component");
+        }
+
         daggerSpawnPoint.transform.SetParent(null);
 
         Debug.Log("Dagger spawned at " + daggerSpawnPoint.position);
