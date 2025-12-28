@@ -85,6 +85,7 @@ public class SollarisController : MonoBehaviour
     {
         Vector3 direction = playerTransform.position - transform.position;
         direction.y = 0f; // Keep only horizontal direction
+        
         if (direction != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(direction);
     }
