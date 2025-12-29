@@ -1377,6 +1377,7 @@ GameObject:
   - component: {fileID: 1937398059}
   - component: {fileID: 1937398060}
   - component: {fileID: 1937398061}
+  - component: {fileID: 1937398062}
   m_Layer: 0
   m_Name: Solaris
   m_TagString: Untagged
@@ -1392,7 +1393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937398057}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.0044853934, y: -0.0000013563713, z: 0.0037062296, w: 0.9999831}
   m_LocalPosition: {x: 21.6, y: 2.81, z: 16.56499}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1400,7 +1401,7 @@ Transform:
   - {fileID: 473444775}
   - {fileID: 371950248}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.514, y: 0.002, z: 0.425}
 --- !u!114 &1937398059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,8 +1414,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd48c5e39e695d49bf918b61d2216fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 1.5
+  currentPhase: 0
+  phase2HealthThreshold: 0.66
   playerTransform: {fileID: 54286474}
+  solarisHealth: {fileID: 1937398062}
+  daggers: {fileID: 0}
+  flareTelegraph: {fileID: 0}
   teleportPoints:
   - {fileID: 77741599}
   - {fileID: 135465381}
@@ -1422,6 +1427,11 @@ MonoBehaviour:
   - {fileID: 609722986}
   - {fileID: 681870119}
   teleportInterval: 3
+  attackDelay: 1.5
+  wallOfLightActive: 0
+  wallOfLightDuration: 3
+  damageReductionMultiplier: 0.5
+  debugManualDamage: 1
 --- !u!114 &1937398060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1455,6 +1465,20 @@ MonoBehaviour:
   daggerPrefab: {fileID: 6445681142992048690, guid: ff01a2ed41e45684fa60cd16b131a4fd, type: 3}
   daggerSpawnPoint: {fileID: 371950248}
   daggerCooldown: 4
+--- !u!114 &1937398062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937398057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaae933b7ec971846940ab7482057071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 500
+  currentHealth: 0
 --- !u!1 &166027529550750614
 GameObject:
   m_ObjectHideFlags: 0
