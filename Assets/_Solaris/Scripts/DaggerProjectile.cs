@@ -43,10 +43,18 @@ public class DaggerProjectile: MonoBehaviour
         {
             health.TakeDamage(damage);
             Debug.Log("Player hit by dagger for " + damage);
-        }
-        if(other.CompareTag("Player"))
-        {
             Destroy(gameObject);
+            return;
         }
+
+        var bridge = other.GetComponentInParent<PlayerDamageBridge>();
+        if (bridge != null)
+        {
+            bridge.TakeDamage(damage);
+            Debug.Log("Player hit by dagger for " + damage + " via PlayerDamageBridge");
+            Destroy(gameObject);
+            return;
+        }
+        Debug.LogWarning("Player hit by dagger but no Health or PlayerDamageBridge found.");
     }
 }

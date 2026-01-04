@@ -2,46 +2,28 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int maxHealth;  // Maximum health
-    public int currentHealth;    // Current health
-    private bool isDead = false; // Flag to check if the player is dead
+    public int maxHealth;  
+    public int currentHealth;
+    internal readonly bool IsDead;
 
-    void Start()
+    private bool isDead => currentHealth <= 0f;
+
+    void Awake()
     {
-        currentHealth = maxHealth; // Initialize current health to maximum health
+        currentHealth = maxHealth; 
     }
 
     // Method to apply damage to the player
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage; // Reduce current health by damage amount
-
-        if (currentHealth <= 0)
-        {
-            Destroy(gameObject); // Destroy the player GameObject if health drops to zero or below
-            //playerDied(); // Call playerDied method if health drops to zero or below
-        }
+        if (isDead) return; // If already dead, do nothing
+        currentHealth = Mathf.Max(currentHealth - damage, 0, maxHealth); // Decrease current health by damage amount, not going below 0
     }
 
     // Method to heal the player
     public void Heal(int amount)
     {
-        currentHealth += amount; // Increase current health by heal amount
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth; // Cap current health at maximum health
-        }
-    }
-
-    // Method to handle player death
-    private void playerDied()
-    {
-        if (currentHealth <= 0)
-        {
-            // Additional death handling logic can be added here
-            isDead = true;
-            Debug.Log("Player has died.");
-            
-        }
+        if (isDead) return; // If already dead, do nothing
+        currentHealth = Mathf.Min(currentHealth + amount, 0, maxHealth); // Increase current health by heal amount, not exceeding max health
     }
 }

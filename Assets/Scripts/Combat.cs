@@ -39,19 +39,5 @@ public class Combat : MonoBehaviour
         var hb = Instantiate(hitboxPrefab, hitboxSpawnPoint.position, hitboxSpawnPoint.rotation);
         Destroy(hb, 0.15f);
     }
-    //private void PerformAttack()
-    //{
-    //    Instantiate the hitbox at the spawn point
-    //    if (hitboxPrefab == null || hitboxSpawnPoint == null)
-    //    {
-    //        return;
-    //    }
 
-    //    Debug.Log("ATTACK! Spawning hitbox at " + hitboxSpawnPoint.position);
-
-    //    var hb = Instantiate(hitboxPrefab, hitboxSpawnPoint.position, hitboxSpawnPoint.rotation);
-    //    Destroy(hb, 0.15f);
-    //    Additional attack behavior can be implemented here
-    //}
-    // Alternative implementation using AttackBehavior
 }
