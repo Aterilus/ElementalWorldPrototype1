@@ -38,14 +38,17 @@ public class SolarisController : MonoBehaviour
     [Header("Timing / Movement")]
     public Transform[] teleportPoints;
     public float teleportInterval = 3f;
-    private float teleportTimer = 0f;
+    public float teleportTimer = 0f;
+    public float teleportMaxTimer = 20f;
 
     // =================================
     // Attack Timing
     // =================================
     [Header("Phase 1 Timing")]
-    public float attackDelay = 1.5f;
-    
+    public float flareAttackDelayMaxTimer = 5f;
+    public float flareAttackCoolDown = 0f;
+    public float daggersAttackDelayMaxTimer = 10f;
+    public float daggersAttackCoolDown = 0f;
 
     /// =================================
     /// Fight State
@@ -99,6 +102,10 @@ public class SolarisController : MonoBehaviour
         // Always on behavior
         HandleCommon();
 
+        teleportTimer -= Time.deltaTime;
+        flareAttackCoolDown -= Time.deltaTime;
+        daggersAttackCoolDown -= Time.deltaTime;
+
         if (playerHealth != null && playerHealth.IsDead)
         {
             OnPlayerDefeated();
@@ -142,11 +149,11 @@ public class SolarisController : MonoBehaviour
 
     private void TickTeleport()
     {
-        teleportTimer += Time.deltaTime;
-        if (teleportTimer >= teleportInterval)
+        //teleportTimer = teleportMaxTimer;
+        if (teleportTimer <= 0)
         {
             TeleportToRandomPoint();
-            teleportTimer = 0f;
+            teleportTimer = teleportMaxTimer;
         }
     }
 
@@ -155,6 +162,7 @@ public class SolarisController : MonoBehaviour
         int randomIndex = Random.Range(0, teleportPoints.Length);
         transform.position = teleportPoints[randomIndex].position;
     }
+   
 
     // =================================
     // Phase Transition
@@ -223,15 +231,21 @@ public class SolarisController : MonoBehaviour
     {
         while (fightActive && currentPhase == SolarisPhase.Phase1)
         {
-            if (flareTelegraph != null)
+            if (flareTelegraph != null && flareAttackCoolDown == 0f)
                 flareTelegraph.TriggerFlare(playerTransform);
+                Debug.Log("FLARE FIRED " + Time.time);
+                flareAttackCoolDown = flareAttackDelayMaxTimer;
+                
+            yield return new WaitForSeconds(flareAttackDelayMaxTimer);
 
-            yield return new WaitForSeconds(attackDelay);
-
-            if (daggers != null)
+            if (daggers != null && daggersAttackCoolDown == 0f)
                 daggers.TryFire(playerTransform);
+                Debug.Log("DAGGERS FIRED " + Time.time);
+                daggersAttackCoolDown = daggersAttackDelayMaxTimer;
+                
+            yield return new WaitForSeconds(daggersAttackDelayMaxTimer);
 
-            yield return new WaitForSeconds(0.4f);
+            //yield return null;
         }
     }
 
