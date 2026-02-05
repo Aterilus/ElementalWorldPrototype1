@@ -23,6 +23,10 @@ public class Scene2Health : MonoBehaviour
     {
         if (IsDead) return;
         currentHealth += healAmount;
+        if (currentHealth > maxHealth)         
+        {
+            currentHealth = maxHealth;
+        }
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
     }
 }

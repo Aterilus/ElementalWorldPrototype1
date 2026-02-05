@@ -4,96 +4,37 @@ using System.Collections;
 public class WallOfLight : MonoBehaviour
 {
     [Header("Refs")]
-    public Scene2Health solarisHealth;
-    public Collider lightTrigger;
+    public float healPerSecond = 5f;
+    public bool isActive;
     public GameObject visualRoot;
 
-    [Header("Behavior")]
-    public float duration = 3f;
-    public float healPerSecond = 20f;
-    public float stunDuration = 1.25f;
+    private Scene2Health solarisHealth;
 
-    bool playerInLight;
-
-    public bool IsActive { get; private set; }
-    public bool PlayerCaughtThisCast { get; private set; }
 
     private void Awake()
     {
-        if (lightTrigger != null) lightTrigger.isTrigger = true;
-        SetActive(false);
+        solarisHealth = GetComponent<Scene2Health>();
     }
 
     public void Activate()
     {
-        if (IsActive) return;
-        StartCoroutine(ActivateRoutine());
+        isActive = true;
+        visualRoot.SetActive(true);
     }
 
-    IEnumerator ActivateRoutine()
+    public void Deactivate()
     {
-        IsActive = true;
-        PlayerCaughtThisCast = false;
-        playerInLight = false;
-
-        SetActive(true);
-
-        float t = 0f;
-        while (t < duration)
-        {
-            if (solarisHealth != null)
-            {
-                solarisHealth.currentHealth = Mathf.Min(solarisHealth.maxHealth, solarisHealth.currentHealth + healPerSecond * Time.deltaTime);
-            }
-
-            if (playerInLight && !PlayerCaughtThisCast)
-            {
-                PlayerCaughtThisCast = true;
-            }
-
-            yield return null;
-        }
-
-        SetActive(false);
-        IsActive = false;
+        isActive = false;
+        visualRoot.SetActive(false);
     }
 
-    public void SetActive(bool on)
+    private void Update()
     {
-        if (visualRoot != null)
-        {
-            visualRoot.SetActive(on);
-        }
-        if (lightTrigger != null)
-        {
-            lightTrigger.enabled = on;
-        }
-    }
+        if (!isActive) return;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!IsActive) return;
-        if (other.CompareTag("Player"))
+        if (solarisHealth != null)
         {
-            return;
+            solarisHealth.Heal(healPerSecond * Time.deltaTime);
         }
-
-        playerInLight = true;
-
-        var statusEffects = other.GetComponentInParent<PlayerStatusEffects>();
-        if (statusEffects != null)
-        {
-            statusEffects.ApplyStun(stunDuration);
-            PlayerCaughtThisCast = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            return;
-        }
-        playerInLight = false;
     }
 }

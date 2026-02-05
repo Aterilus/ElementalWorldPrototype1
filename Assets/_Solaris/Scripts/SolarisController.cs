@@ -13,10 +13,11 @@ public class SolarisController : MonoBehaviour
         Phase3
     }
 
-    [Header("Phases")]
+    [Header("Phase")]
     public SolarisPhase currentPhase = SolarisPhase.Phase1;
-    [Range(0f, 1f)] public float phase2HealthThreshold = 0.66f;
+    [Range(0f, 1f)] public float phase2HealthThreshold = 0.60f;
     private bool enterPhase2 = false;
+    private bool wallPermanentlyDisabled = false;
 
     // =================================
     // References
@@ -31,6 +32,7 @@ public class SolarisController : MonoBehaviour
     public Health playerHealth;
 
     [SerializeField] private WallOfLight wallOfLight;
+    [SerializeField] private WallOfLightShield wallOfLightShield;
 
     // =================================
     // Teleport/ Movement
@@ -61,12 +63,31 @@ public class SolarisController : MonoBehaviour
     // =================================
     [Header("Wall of Light")]
     public bool wallOfLightActive = false;
-    public float wallOfLightDuration = 3f;
-    public float damageReductionMultiplier = 0.5f;
+    [Tooltip("Duration the Wall of Light remains active during Phase 2")]
+    public float wallOfLightDuration = 6f;
+
+    [Tooltip("How much Solaris Heals per second while Wall of Light is active")]
+    public float wallOfLightHealPerSecond = 5f;
+
+    [Tooltip("Shield HP the player must break to disable the Wall of Light permanently")]
+    public float wallOfLightShieldHP = 200f;
+
+    [Header("Wall Damage & Heal Balancing")]
+    [Range(0f, 1f)] public float wallDamagePassThroughMultiplier = 0.15f;
+
+    [Range(0f, 1f)] public float wallHealCapPercent = 0.75f;
 
     [Header("Phase 2 Timing")]
     public float phase2CycleInterval = 6f;
     public float phase2DaggerBurstTime = 2.5f;
+    public float phase2BurstTick = 0.6f;
+
+    // =================================
+    // Phase 3 Vulnerability
+    // =================================
+    [Header("Phase 3")]
+    [Tooltip("In Phase 3 Solaris takes more damege when wall of light is permanetly disabled")]
+    public float phase3DamageMultiplier = 1.5f;
 
     // =================================
     // Debugging
@@ -81,12 +102,13 @@ public class SolarisController : MonoBehaviour
     // =================================
     private void Awake()
     {
-        if (daggers == null) daggers = GetComponent<SolarisDaggers>();
-        if (flareTelegraph == null) flareTelegraph = GetComponent<SolarisFlareTelegraph>();
-
-        if (solarisHealth == null)
-        {
-            solarisHealth = GetComponent<Scene2Health>();
+        if (daggers == null) { daggers = GetComponent<SolarisDaggers>(); }
+        if (flareTelegraph == null) { flareTelegraph = GetComponent<SolarisFlareTelegraph>(); }
+        if (solarisHealth == null) { solarisHealth = GetComponent<Scene2Health>(); }
+        if (wallOfLight != null)
+        {   
+            //wallOfLight.OnShieldBroken += OnWallBroken;
+            wallOfLight.Deactivate();
         }
 
         StartPhaseLoop(currentPhase);
@@ -94,10 +116,23 @@ public class SolarisController : MonoBehaviour
 
     private void Update()
     {
+        // Manual damage for testing
+        if (debugManualDamage && Input.GetKeyDown(KeyCode.Y))
+        {
+            if(currentPhase == SolarisPhase.Phase2 && wallOfLight != null && wallOfLightActive == true)
+            {
+                wallOfLightShield.TakeDamage(10f);
+            }
+            else
+            {
+                TakeDamage(10f);
+            }
+        }
+
         // Safety checks
-        if (!fightActive) return;
-        if (playerTransform == null) return;
-        if (teleportPoints == null || teleportPoints.Length == 0) return;
+        if (!fightActive) { return; }
+        if (playerTransform == null) { return; }
+        if (teleportPoints == null || teleportPoints.Length == 0) { return; }
 
         // Always on behavior
         HandleCommon();
@@ -105,6 +140,22 @@ public class SolarisController : MonoBehaviour
         teleportTimer -= Time.deltaTime;
         flareAttackCoolDown -= Time.deltaTime;
         daggersAttackCoolDown -= Time.deltaTime;
+
+        if (wallOfLight && solarisHealth != null)
+        {
+            float healCap = solarisHealth.maxHealth * wallHealCapPercent;
+            if (solarisHealth.currentHealth < healCap)
+            {
+                float healAmount = wallOfLightHealPerSecond * Time.deltaTime;
+
+                if (solarisHealth.currentHealth + healAmount > healCap)
+                {
+                    healAmount = healCap - solarisHealth.currentHealth;
+                }
+
+                solarisHealth.Heal(healAmount);
+            }
+        }
 
         if (playerHealth != null && playerHealth.IsDead)
         {
@@ -120,13 +171,6 @@ public class SolarisController : MonoBehaviour
 
         // Phase transitions
         CheckPhaseTransitions();
-
-        // Manual damage for testing
-        if (debugManualDamage && Input.GetKeyDown(KeyCode.Y))
-        {
-            TakeDamage(10f);
-            Debug.Log("TEST: Y pressed - trying to fire dagger");
-        }
     }
 
     // =================================
@@ -144,12 +188,14 @@ public class SolarisController : MonoBehaviour
         direction.y = 0f; // Keep only horizontal direction
 
         if (direction != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(direction);
+        { 
+            transform.rotation = Quaternion.LookRotation(direction); 
+        }
     }
 
     private void TickTeleport()
     {
-        //teleportTimer = teleportMaxTimer;
+
         if (teleportTimer <= 0)
         {
             TeleportToRandomPoint();
@@ -169,8 +215,7 @@ public class SolarisController : MonoBehaviour
     // =================================
     void CheckPhaseTransitions()
     {
-        if (solarisHealth == null)
-            return;
+        if (solarisHealth == null) { return; }
 
         if (!enterPhase2 && currentPhase == SolarisPhase.Phase1)
         {
@@ -190,6 +235,17 @@ public class SolarisController : MonoBehaviour
         Debug.Log("Entering Phase 2");
 
         StartPhaseLoop(SolarisPhase.Phase2);
+    }
+
+    void EnterPhase3() 
+    {
+        currentPhase = SolarisPhase.Phase3;
+        Debug.Log("Entering Phase 3");
+
+        wallPermanentlyDisabled = true;
+        DeactivateWallOfLight();
+
+        StartPhaseLoop(SolarisPhase.Phase3);
     }
 
     // =================================
@@ -232,16 +288,20 @@ public class SolarisController : MonoBehaviour
         while (fightActive && currentPhase == SolarisPhase.Phase1)
         {
             if (flareTelegraph != null && flareAttackCoolDown == 0f)
+            {
                 flareTelegraph.TriggerFlare(playerTransform);
                 Debug.Log("FLARE FIRED " + Time.time);
                 flareAttackCoolDown = flareAttackDelayMaxTimer;
+            }
                 
             yield return new WaitForSeconds(flareAttackDelayMaxTimer);
 
             if (daggers != null && daggersAttackCoolDown == 0f)
+            {
                 daggers.TryFire(playerTransform);
                 Debug.Log("DAGGERS FIRED " + Time.time);
                 daggersAttackCoolDown = daggersAttackDelayMaxTimer;
+            }
                 
             yield return new WaitForSeconds(daggersAttackDelayMaxTimer);
 
@@ -256,35 +316,52 @@ public class SolarisController : MonoBehaviour
     private IEnumerator Phase2Loop()
     {
         while(fightActive && currentPhase == SolarisPhase.Phase2)
+        {
+             if (wallPermanentlyDisabled)
+             {
+                EnterPhase3();
+                yield break;
+             }
+
             ActivateWallOfLight();
 
-        float t = 0f;
-        while(t < phase2DaggerBurstTime && fightActive && currentPhase == SolarisPhase.Phase2)
-            if (flareTelegraph != null)
-                flareTelegraph.TriggerFlare(playerTransform);
+            float t = 0f;
+            while (t < phase2DaggerBurstTime && fightActive && currentPhase == SolarisPhase.Phase2)
+            {
+                if (flareTelegraph != null)
+                {
+                    flareTelegraph.TriggerFlare(playerTransform); 
+                }
 
-            yield return new WaitForSeconds(0.6f);
+                if (daggers != null)
+                {
+                    daggers.TryFire(playerTransform); 
+                }
+                t += phase2BurstTick;
+                yield return new WaitForSeconds(phase2BurstTick);
+            }
 
-            if (daggers != null)
-                daggers.TryFire(playerTransform);
+            yield return new WaitForSeconds(Mathf.Max(0f, wallOfLightDuration - t));
+            
+            DeactivateWallOfLight();
 
-            t += 0.6f;
-
-        yield return new WaitForSeconds(Mathf.Max(0f, wallOfLightDuration - phase2DaggerBurstTime));
-        DeactivateWallOfLight();
-
-        yield return new WaitForSeconds(phase2CycleInterval);
+            yield return new WaitForSeconds(phase2CycleInterval);
+        }
     }
     void ActivateWallOfLight()
     {
+        if (wallPermanentlyDisabled) { return; }
+
         wallOfLightActive = true;
 
         if (wallOfLight != null)
-            wallOfLight.SetActive(true);
+        { 
+            wallOfLight.Activate(); 
+        }
 
         Debug.Log("Wall of Light Activated");
 
-        Invoke(nameof(DeactivateWallOfLight), wallOfLightDuration);
+        //Invoke(nameof(DeactivateWallOfLight), wallOfLightDuration);
     }
 
     void DeactivateWallOfLight()
@@ -292,10 +369,21 @@ public class SolarisController : MonoBehaviour
         wallOfLightActive = false;
 
         if (wallOfLight != null)
-            wallOfLight.SetActive(false);
+        { 
+            wallOfLight.Deactivate(); 
+        }
 
         Debug.Log("Wall of Light Deactivated");
-        CancelInvoke(nameof(DeactivateWallOfLight));
+        //CancelInvoke(nameof(DeactivateWallOfLight));
+    }
+
+    public void OnWallBroken()
+    {
+        Debug.Log("Wall of Light BROKEN by player");
+        wallPermanentlyDisabled = true;
+        wallOfLightActive = false;
+
+        EnterPhase3();
     }
 
     // =================================
@@ -303,15 +391,29 @@ public class SolarisController : MonoBehaviour
     // =================================
     public void TakeDamage(float damageAmount)
     {
-        if (solarisHealth == null)
+        if (solarisHealth == null) { return; }
+
+        solarisHealth.TakeDamage(damageAmount);
+
+        if (currentPhase == SolarisPhase.Phase2 && wallOfLightActive)
+        {
+            float reduced = damageAmount * wallDamagePassThroughMultiplier;
+            solarisHealth.TakeDamage(reduced);
             return;
+        }
 
-        float finalDamage = damageAmount;
 
-        if (wallOfLightActive)
-            finalDamage *= damageReductionMultiplier;
+        //float finalDamage = damageAmount;
 
-        solarisHealth.TakeDamage(finalDamage);
+        if (currentPhase == SolarisPhase.Phase3 && wallPermanentlyDisabled)
+        {
+            damageAmount *= phase3DamageMultiplier;
+            solarisHealth.TakeDamage(damageAmount);
+            return;
+        }
+
+        //if (wallOfLightActive)
+        //finalDamage *= damageReductionMultiplier;
     }
 
     /// =================================
@@ -324,7 +426,7 @@ public class SolarisController : MonoBehaviour
 
         StopAllCoroutines();
 
-        Debug.Log("Solaris: You are not ready. Rety?");
+        Debug.Log("Solaris: You are not ready. Retry?");
     }
     
     private void OnSolarisDefeated()
