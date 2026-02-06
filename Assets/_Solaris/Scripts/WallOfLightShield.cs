@@ -14,6 +14,7 @@ public class WallOfLightShield : MonoBehaviour
     public Action OnShieldBroken;
 
     private Collider shieldCollider;
+    private bool isActive;
 
     private void OnEnable()
     {
@@ -21,7 +22,7 @@ public class WallOfLightShield : MonoBehaviour
         solaris = GetComponentInParent<SolarisController>();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeShieldDamage(float damage)
     {
         currentShieldHP -= damage;
 
@@ -38,6 +39,32 @@ public class WallOfLightShield : MonoBehaviour
         if (solaris != null)
         {
             solaris.OnWallBroken();
+        }
+    }
+
+    public void Active(float newShieldHP = -1f)
+    {
+        if (newShieldHP > 0f)
+        {
+           maxShieldHP = newShieldHP;
+        }
+        currentShieldHP = maxShieldHP;
+        gameObject.SetActive(true);
+    }
+
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void SetActive(bool active)
+    {
+        isActive = active;
+
+        var collider = GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = active;
         }
     }
 }

@@ -70,7 +70,7 @@ public class SolarisController : MonoBehaviour
     public float wallOfLightHealPerSecond = 5f;
 
     [Tooltip("Shield HP the player must break to disable the Wall of Light permanently")]
-    public float wallOfLightShieldHP = 200f;
+    public float wallOfLightShieldHP = 250f;
 
     [Header("Wall Damage & Heal Balancing")]
     [Range(0f, 1f)] public float wallDamagePassThroughMultiplier = 0.15f;
@@ -105,12 +105,13 @@ public class SolarisController : MonoBehaviour
         if (daggers == null) { daggers = GetComponent<SolarisDaggers>(); }
         if (flareTelegraph == null) { flareTelegraph = GetComponent<SolarisFlareTelegraph>(); }
         if (solarisHealth == null) { solarisHealth = GetComponent<Scene2Health>(); }
-        if (wallOfLight != null)
+        if (wallOfLightShield != null)
         {   
-            //wallOfLight.OnShieldBroken += OnWallBroken;
-            wallOfLight.Deactivate();
+            wallOfLightShield.OnShieldBroken += OnWallBroken;
+            //wallOfLight.Deactivate();
         }
 
+        DeactivateWallOfLight();
         StartPhaseLoop(currentPhase);
     }
 
@@ -121,7 +122,7 @@ public class SolarisController : MonoBehaviour
         {
             if(currentPhase == SolarisPhase.Phase2 && wallOfLight != null && wallOfLightActive == true)
             {
-                wallOfLightShield.TakeDamage(10f);
+                wallOfLightShield.TakeShieldDamage(10f);
             }
             else
             {
@@ -141,7 +142,7 @@ public class SolarisController : MonoBehaviour
         flareAttackCoolDown -= Time.deltaTime;
         daggersAttackCoolDown -= Time.deltaTime;
 
-        if (wallOfLight && solarisHealth != null)
+        if (wallOfLightActive && solarisHealth != null)
         {
             float healCap = solarisHealth.maxHealth * wallHealCapPercent;
             if (solarisHealth.currentHealth < healCap)
@@ -287,7 +288,7 @@ public class SolarisController : MonoBehaviour
     {
         while (fightActive && currentPhase == SolarisPhase.Phase1)
         {
-            if (flareTelegraph != null && flareAttackCoolDown == 0f)
+            if (flareTelegraph != null && flareAttackCoolDown <= 0f)
             {
                 flareTelegraph.TriggerFlare(playerTransform);
                 Debug.Log("FLARE FIRED " + Time.time);
@@ -296,7 +297,7 @@ public class SolarisController : MonoBehaviour
                 
             yield return new WaitForSeconds(flareAttackDelayMaxTimer);
 
-            if (daggers != null && daggersAttackCoolDown == 0f)
+            if (daggers != null && daggersAttackCoolDown <= 0f)
             {
                 daggers.TryFire(playerTransform);
                 Debug.Log("DAGGERS FIRED " + Time.time);
@@ -315,37 +316,29 @@ public class SolarisController : MonoBehaviour
 
     private IEnumerator Phase2Loop()
     {
-        while(fightActive && currentPhase == SolarisPhase.Phase2)
+        ActivateWallOfLight();
+
+        while (fightActive && currentPhase == SolarisPhase.Phase2)
         {
-             if (wallPermanentlyDisabled)
-             {
-                EnterPhase3();
-                yield break;
-             }
-
-            ActivateWallOfLight();
-
-            float t = 0f;
-            while (t < phase2DaggerBurstTime && fightActive && currentPhase == SolarisPhase.Phase2)
+            if (!wallOfLightActive) { yield break; }
+            if (flareTelegraph != null)
             {
-                if (flareTelegraph != null)
-                {
-                    flareTelegraph.TriggerFlare(playerTransform); 
-                }
-
-                if (daggers != null)
-                {
-                    daggers.TryFire(playerTransform); 
-                }
-                t += phase2BurstTick;
-                yield return new WaitForSeconds(phase2BurstTick);
+                flareTelegraph.TriggerFlare(playerTransform);
             }
 
-            yield return new WaitForSeconds(Mathf.Max(0f, wallOfLightDuration - t));
-            
-            DeactivateWallOfLight();
+            if (daggers != null)
+            {
+                daggers.TryFire(playerTransform);
+            }
+           
+            yield return new WaitForSeconds(phase2BurstTick);
 
-            yield return new WaitForSeconds(phase2CycleInterval);
+            //if (wallOfLightShieldHP == 0)
+            //{
+            //    DeactivateWallOfLight();
+            //}
+
+            yield break;
         }
     }
     void ActivateWallOfLight()
@@ -357,6 +350,12 @@ public class SolarisController : MonoBehaviour
         if (wallOfLight != null)
         { 
             wallOfLight.Activate(); 
+        }
+
+        if (wallOfLightShield != null)
+        {
+            wallOfLightShield.maxShieldHP = wallOfLightShieldHP;
+            wallOfLightShield.Active(wallOfLightShieldHP);
         }
 
         Debug.Log("Wall of Light Activated");
@@ -373,6 +372,11 @@ public class SolarisController : MonoBehaviour
             wallOfLight.Deactivate(); 
         }
 
+        if (wallOfLightShield != null)
+        {
+            wallOfLightShield.Deactivate();
+        }
+
         Debug.Log("Wall of Light Deactivated");
         //CancelInvoke(nameof(DeactivateWallOfLight));
     }
@@ -380,9 +384,6 @@ public class SolarisController : MonoBehaviour
     public void OnWallBroken()
     {
         Debug.Log("Wall of Light BROKEN by player");
-        wallPermanentlyDisabled = true;
-        wallOfLightActive = false;
-
         EnterPhase3();
     }
 
@@ -393,27 +394,19 @@ public class SolarisController : MonoBehaviour
     {
         if (solarisHealth == null) { return; }
 
-        solarisHealth.TakeDamage(damageAmount);
+        float finalDamage = damageAmount;
 
         if (currentPhase == SolarisPhase.Phase2 && wallOfLightActive)
         {
-            float reduced = damageAmount * wallDamagePassThroughMultiplier;
-            solarisHealth.TakeDamage(reduced);
-            return;
+            finalDamage *= wallDamagePassThroughMultiplier;
         }
-
-
-        //float finalDamage = damageAmount;
 
         if (currentPhase == SolarisPhase.Phase3 && wallPermanentlyDisabled)
         {
-            damageAmount *= phase3DamageMultiplier;
-            solarisHealth.TakeDamage(damageAmount);
-            return;
+            finalDamage *= phase3DamageMultiplier;
         }
 
-        //if (wallOfLightActive)
-        //finalDamage *= damageReductionMultiplier;
+        solarisHealth.TakeDamage(finalDamage);
     }
 
     /// =================================
