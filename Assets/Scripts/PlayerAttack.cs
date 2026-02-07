@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+public class Attack : MonoBehaviour
 {
     // Method for trigger enter
     private void OnTriggerEnter(Collider other)

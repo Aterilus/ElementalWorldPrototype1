@@ -24,7 +24,7 @@ public class SolarisController : MonoBehaviour
     // =================================
     [Header("References")]
     public Transform playerTransform;
-    [SerializeField] public Scene2Health solarisHealth;
+    [SerializeField] public Health solarisHealth;
 
     [SerializeField] private SolarisDaggers daggers;
     [SerializeField] private SolarisFlareTelegraph flareTelegraph;
@@ -104,7 +104,7 @@ public class SolarisController : MonoBehaviour
     {
         if (daggers == null) { daggers = GetComponent<SolarisDaggers>(); }
         if (flareTelegraph == null) { flareTelegraph = GetComponent<SolarisFlareTelegraph>(); }
-        if (solarisHealth == null) { solarisHealth = GetComponent<Scene2Health>(); }
+        if (solarisHealth == null) { solarisHealth = GetComponent<Health>(); }
         if (wallOfLightShield != null)
         {   
             wallOfLightShield.OnShieldBroken += OnWallBroken;
@@ -122,7 +122,9 @@ public class SolarisController : MonoBehaviour
         {
             if(currentPhase == SolarisPhase.Phase2 && wallOfLight != null && wallOfLightActive == true)
             {
-                wallOfLightShield.TakeShieldDamage(10f);
+                float damageToWall = 10f;
+                wallOfLightShield.TakeShieldDamage(damageToWall);
+                ApplyChipDamageDuringWall(damageToWall);
             }
             else
             {
@@ -324,11 +326,13 @@ public class SolarisController : MonoBehaviour
             if (flareTelegraph != null)
             {
                 flareTelegraph.TriggerFlare(playerTransform);
+                flareAttackCoolDown = flareAttackDelayMaxTimer;
             }
 
             if (daggers != null)
             {
                 daggers.TryFire(playerTransform);
+                daggersAttackCoolDown = daggersAttackDelayMaxTimer;
             }
            
             yield return new WaitForSeconds(phase2BurstTick);
@@ -407,6 +411,18 @@ public class SolarisController : MonoBehaviour
         }
 
         solarisHealth.TakeDamage(finalDamage);
+    }
+
+    public void ApplyChipDamageDuringWall(float incomingDamage)
+    {
+        if (solarisHealth == null) { return; }
+        if (currentPhase != SolarisPhase.Phase2) { return; }
+        if (!wallOfLightActive) { return; }
+
+        float chipDamage = incomingDamage * wallDamagePassThroughMultiplier;
+        if (chipDamage <= 0f) { return; }
+
+        solarisHealth.TakeDamage(chipDamage);
     }
 
     /// =================================

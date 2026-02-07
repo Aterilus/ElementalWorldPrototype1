@@ -8,12 +8,12 @@ public class WallOfLight : MonoBehaviour
     public bool isActive;
     public GameObject visualRoot;
 
-    private Scene2Health solarisHealth;
+    private Health solarisHealth;
 
 
     private void Awake()
     {
-        solarisHealth = GetComponent<Scene2Health>();
+        solarisHealth = GetComponent<Health>();
     }
 
     public void Activate()

@@ -21,7 +21,7 @@ public class HitboxScript : MonoBehaviour
             if (hurtbox != null) 
             {
                 hurtbox.healthComponent.TakeDamage((int)damageAmount); // Apply damage to the hurtbox's health component
-                hurtbox.characterController.Move(v3Knockback * Time.deltaTime); // Apply knockback to the hurtbox's character controller
+                //hurtbox.characterController.Move(v3Knockback * Time.deltaTime); // Apply knockback to the hurtbox's character controller
                 Destroy(this.gameObject); // Destroy the hitbox after applying damage and knockback
 
             }

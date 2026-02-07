@@ -2,28 +2,47 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int maxHealth;  
-    public int currentHealth;
-    internal readonly bool IsDead;
+    public float maxHealth = 100f;
+    public float currentHealth;
 
-    private bool isDead => currentHealth <= 0f;
+    public bool IsDead => currentHealth <= 0f;
 
-    void Awake()
+    private void Awake()
     {
-        currentHealth = maxHealth; 
+        currentHealth = maxHealth;
     }
 
-    // Method to apply damage to the player
-    public void TakeDamage(int damage)
+    private void Update()
     {
-        if (isDead) return; // If already dead, do nothing
-        currentHealth = Mathf.Max(currentHealth - damage, 0, maxHealth); // Decrease current health by damage amount, not going below 0
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            TakeDamage(10f);
+        }
     }
 
-    // Method to heal the player
-    public void Heal(int amount)
+    public void TakeDamage(float damageAmount)
     {
-        if (isDead) return; // If already dead, do nothing
-        currentHealth = Mathf.Min(currentHealth + amount, 0, maxHealth); // Increase current health by heal amount, not exceeding max health
+        //if (IsDead) return;
+        Debug.Log($"[Health] TakeDamage called on {gameObject.name}. amount = {damageAmount} BEFORE = {currentHealth}");
+        currentHealth -= damageAmount;
+
+        Debug.Log($"[Health] AFTER = {currentHealth}");
+        if (currentHealth < 0f)         
+        {
+            currentHealth = 0f;
+            Debug.Log($"[Health] {gameObject.name} is now dead.");
+        }
+        //currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+    }
+
+    public void Heal(float healAmount)
+    {
+        if (IsDead) return;
+        currentHealth += healAmount;
+        if (currentHealth > maxHealth)         
+        {
+            currentHealth = maxHealth;
+        }
+        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
     }
 }

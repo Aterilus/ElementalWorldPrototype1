@@ -13,12 +13,13 @@ public class FlareDamage : MonoBehaviour
 
         var playerHealth = other.GetComponentInParent<Health>();
 
-        if (playerHealth == null)
+        if (playerHealth != null)
         {
+            playerHealth.TakeDamage(damageAmount);
+            Debug.Log("Player hit by flare for " + damageAmount);
+
             return;
         }
 
-        playerHealth.TakeDamage(damageAmount);
-        Debug.Log("Player hit by flare for " + damageAmount);
     }
 }
