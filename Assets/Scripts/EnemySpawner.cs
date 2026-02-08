@@ -2,18 +2,23 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Header("Spawn Settings")]
     public GameObject enemyPrefab;
     public Transform[] spawnPoints;
-    public int spawnCount = 5;
+    public int enemiesToSpawn = 2;
+    public float spawnDelay = 0.5f;
 
-    [ContextMenu("Spawn Enemies")]
+    private void Start()
+    {
+        SpawnEnimies();
+    }
     public void SpawnEnimies()
     {
-        if (enemyPrefab == null || spawnPoints == null || spawnPoints.Length == 0) { return; }
+        if (enemyPrefab == null || spawnPoints.Length == 0) { return; }
 
-        for (int i = 0; i < spawnCount; ++i)
+        for (int i = 0; i < enemiesToSpawn; ++i)
         {
-            Transform p = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            Transform p = spawnPoints[i % spawnPoints.Length];
             Instantiate(enemyPrefab, p.position, p.rotation);
         }
     }

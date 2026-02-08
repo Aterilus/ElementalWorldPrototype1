@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -7,9 +8,13 @@ public class Health : MonoBehaviour
 
     public bool IsDead => currentHealth <= 0f;
 
+    public event Action<Health> OnDied;
+
+    private bool died;
+
     private void Awake()
     {
-        currentHealth = maxHealth;
+        if (currentHealth <= 0f) { currentHealth = maxHealth; }
     }
 
     private void Update()
@@ -22,27 +27,41 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
-        //if (IsDead) return;
+        if (died) { return; }
+        if (damageAmount <= 0f) { return; }
+
         Debug.Log($"[Health] TakeDamage called on {gameObject.name}. amount = {damageAmount} BEFORE = {currentHealth}");
         currentHealth -= damageAmount;
 
         Debug.Log($"[Health] AFTER = {currentHealth}");
-        if (currentHealth < 0f)         
+        if (currentHealth <= 0f)         
         {
             currentHealth = 0f;
             Debug.Log($"[Health] {gameObject.name} is now dead.");
+            Die();
         }
         //currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
     }
 
     public void Heal(float healAmount)
     {
-        if (IsDead) return;
+        if (died) { return; }
+        if (healAmount <= 0f) { return; }
+
         currentHealth += healAmount;
         if (currentHealth > maxHealth)         
         {
             currentHealth = maxHealth;
         }
+
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+    }
+
+    private void Die()
+    {
+        if (died) { return; }
+        died = true;
+        OnDied?.Invoke(this);
+        Destroy(gameObject);
     }
 }

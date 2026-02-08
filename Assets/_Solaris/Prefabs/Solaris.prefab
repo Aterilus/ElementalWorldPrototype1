@@ -67,7 +67,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthComponent: {fileID: 0}
-  characterController: {fileID: 0}
 --- !u!1 &3917605897055504344
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +142,6 @@ GameObject:
   - component: {fileID: 2215683178512582349}
   - component: {fileID: 1570098452086296831}
   - component: {fileID: 5882538858249692795}
-  - component: {fileID: 7640722330430619820}
   m_Layer: 0
   m_Name: Solaris
   m_TagString: Untagged
@@ -185,11 +183,12 @@ MonoBehaviour:
   currentPhase: 0
   phase2HealthThreshold: 0.66
   playerTransform: {fileID: 0}
-  solarisHealth: {fileID: 7640722330430619820}
+  solarisHealth: {fileID: 0}
   daggers: {fileID: 0}
   flareTelegraph: {fileID: 0}
   playerHealth: {fileID: 0}
   wallOfLight: {fileID: 0}
+  wallOfLightShield: {fileID: 0}
   teleportPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -197,13 +196,23 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   teleportInterval: 3
-  attackDelay: 1.5
+  teleportTimer: 0
+  teleportMaxTimer: 20
+  flareAttackDelayMaxTimer: 5
+  flareAttackCoolDown: 0
+  daggersAttackDelayMaxTimer: 10
+  daggersAttackCoolDown: 0
   fightActive: 1
   wallOfLightActive: 0
   wallOfLightDuration: 3
-  damageReductionMultiplier: 0.5
+  wallOfLightHealPerSecond: 5
+  wallOfLightShieldHP: 250
+  wallDamagePassThroughMultiplier: 0.15
+  wallHealCapPercent: 0.75
   phase2CycleInterval: 6
   phase2DaggerBurstTime: 2.5
+  phase2BurstTick: 0.6
+  phase3DamageMultiplier: 1.5
   debugManualDamage: 1
 --- !u!114 &1570098452086296831
 MonoBehaviour:
@@ -238,20 +247,6 @@ MonoBehaviour:
   daggerPrefab: {fileID: 6445681142992048690, guid: ff01a2ed41e45684fa60cd16b131a4fd, type: 3}
   daggerSpawnPoint: {fileID: 6382022836243720042}
   daggerCooldown: 4
---- !u!114 &7640722330430619820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7117916302207014681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaae933b7ec971846940ab7482057071, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 500
-  currentHealth: 0
 --- !u!1 &7682491496391218713
 GameObject:
   m_ObjectHideFlags: 0
