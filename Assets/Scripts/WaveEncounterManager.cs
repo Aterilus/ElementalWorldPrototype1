@@ -150,6 +150,6 @@ public class WaveEncounterManager : MonoBehaviour
 
         encounterRunning = false;
 
-        SceneManager.LoadScene("HubScene");
+        SceneManager.LoadScene("OpenWorld");
     }
 }

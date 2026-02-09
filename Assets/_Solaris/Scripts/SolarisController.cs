@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SolarisController : MonoBehaviour
 {
@@ -115,6 +116,7 @@ public class SolarisController : MonoBehaviour
         StartPhaseLoop(currentPhase);
     }
 
+    [System.Obsolete]
     private void Update()
     {
         // Manual damage for testing
@@ -437,13 +439,22 @@ public class SolarisController : MonoBehaviour
 
         Debug.Log("Solaris: You are not ready. Retry?");
     }
-    
+
+    [System.Obsolete]
     private void OnSolarisDefeated()
     {
         fightActive = false;
         Debug.Log("Solaris: You have proven yourself worthy...");
-    }
 
+        var loader = FindObjectOfType<SceneLoader>();
+        if (loader != null)
+        {
+            loader.LoadAfterdelay("RefugeTown", 3f);
+        }
+        else { 
+            Debug.LogError("SceneLoader not found in scene. Cannot load next scene.");
+        }
+    }
 }
 
 
