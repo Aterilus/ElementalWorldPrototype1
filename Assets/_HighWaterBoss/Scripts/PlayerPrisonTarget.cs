@@ -1,65 +1,79 @@
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class PlayerPrisonTarget : MonoBehaviour
 {
     [Header("Player Movement script")]
-    public MonoBehaviour movementScriptToDisable;
+    public MonoBehaviour[] scriptToDisable;
 
-    [Header("Avoidable Prison")]
-    public float dodgeWindiwSeconds = 0.25f;
-    public float dodgeSpeedThreshold = 7.5f;
+    [Header("Prison Logic")]
     public Rigidbody playerRigidbody;
 
-    private bool recentlyDodged;
+    public bool prisonActive;
+    private RigidbodyConstraints savedconstraints;
+    private bool savedKinematic;
 
     [System.Obsolete]
-    public bool TryDodgePrison()
-    {
-        float speed = 0f;
-
-        if (playerRigidbody != null) { speed = playerRigidbody.velocity.magnitude; }
-
-        bool dodged = speed >= dodgeSpeedThreshold;
-        if (dodged)
-        {
-            if (!recentlyDodged) { StartCoroutine(DodgeLock()); }
-            return true;
-        }
-        return false;
-    }
-
     public void ApplyPrison(float duration, int damageChunk)
     {
-        StartCoroutine(PrisonRoutine(duration, damageChunk));
+        if (!prisonActive)
+        {
+            StartCoroutine(PrisonRoutine(duration, damageChunk));
+        }
     }
 
+    [System.Obsolete]
     private IEnumerator PrisonRoutine(float duration, int damageChunk)
     {
+        prisonActive = true;
+
         Health playerHealth = GetComponent<Health>();
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(damageChunk);
         }
 
-        if (movementScriptToDisable != null)
+        if (scriptToDisable != null)
         {
-            movementScriptToDisable.enabled = false;
+            foreach (var script in scriptToDisable)
+            {
+                if (script)
+                {
+                    script.enabled = false;
+                }
+            }
+        }
+
+        if (playerRigidbody != null)
+        {
+            savedconstraints = playerRigidbody.constraints;
+            savedKinematic = playerRigidbody.isKinematic;
+
+            playerRigidbody.velocity = Vector3.zero;
+            playerRigidbody.angularVelocity = Vector3.zero;
+
+            playerRigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         }
 
         yield return new WaitForSeconds(duration);
 
-        if (movementScriptToDisable != null)
+        if (playerRigidbody !=null)
         {
-            movementScriptToDisable.enabled = true;
+            playerRigidbody.constraints = savedconstraints;
+            playerRigidbody.isKinematic = savedKinematic;
         }
-    }
 
-    private IEnumerator DodgeLock()
-    {
-        recentlyDodged = true;
-        yield return new WaitForSeconds(dodgeWindiwSeconds);
-        recentlyDodged = false;
+        if (scriptToDisable != null)
+        {
+            foreach(var script in scriptToDisable)
+            {
+                if ( script)
+                {
+                    script.enabled = true;
+                }
+            }
+        }
+
+        prisonActive = false;
     }
 }

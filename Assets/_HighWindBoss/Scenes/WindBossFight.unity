@@ -343,6 +343,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
+--- !u!4 &640560294 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2157255695173190118, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
+  m_PrefabInstance: {fileID: 640560293}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &949838082
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,10 +469,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WindBossRoot
       objectReference: {fileID: 0}
-    - target: {fileID: 3286811362972382587, guid: d5207505fd9d2c042af3a110fca703c2, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 6053255977508347198, guid: d5207505fd9d2c042af3a110fca703c2, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 640560294}
     - target: {fileID: 8208441391476883394, guid: d5207505fd9d2c042af3a110fca703c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.9182606

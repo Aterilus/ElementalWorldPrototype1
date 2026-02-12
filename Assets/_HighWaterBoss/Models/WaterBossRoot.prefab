@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 8999444581970348204}
   - component: {fileID: 8014133254424158410}
   - component: {fileID: 1997558292481490356}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WaterBossRoot
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,11 +30,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -35.38674, y: -0.193, z: 57.87924}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8927333617825379018}
   - {fileID: 8029896603409164143}
+  - {fileID: 6997708715535682069}
+  - {fileID: 8258571975531539902}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2671668248310718304
@@ -93,7 +94,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -111,6 +112,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464cb97b8f7d9284390cffc09dfcfdae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  arenaCenter: {fileID: 0}
+  projectileSpawn: {fileID: 6997708715535682069}
+  hydroProjectilePrefab: {fileID: 2023191631215308725, guid: dbfb88513f71c98499dbb4e0fe0d540f, type: 3}
+  moveSpeed: 4
+  strafeSpeed: 2.5
+  keepDistance: 10
+  engageRange: 25
+  arenaRadius: 18
+  globalAttackLock: 0.5
+  waterPrisonEnabled: 1
+  waterPrisonAvoidable: 0
+  waterPrisonCoolDown: 14
+  waterPrisonTelegraph: 0.7
+  waterPrisonDuration: 2.5
+  waterPrisonDamageChunk: 20
+  prisonWarningPrefab: {fileID: 1660716348685406645, guid: be3729e91b6b3834b9d4f33d56c38aaa, type: 3}
+  prisonBubblePrefab: {fileID: 6597053348194025021, guid: 8b5e8074ea4a73341ac714013df0d2eb, type: 3}
+  prisonBubbleYOffset: 1
+  prisonMinionPrefabs:
+  - {fileID: 4558306208073988983, guid: a544ecee705130641860ea771ab796fd, type: 3}
+  minionsMin: 2
+  minionsMax: 3
+  spawnRadius: 4
+  minionLifeTime: 13
+  hydroSnipeEnabled: 1
+  hydroSnipeCoolDown: 4.5
+  hydroSnipeTelegraph: 0.35
+  hydroSnipeProjectileSpeed: 28
+  hydroSnipeProjectileDamage: 12
+  acidWaveEnabled: 1
+  acidTickInterval: 1.2
+  acidTickDamage: 2
+  acidStartDelay: 1.5
+  acidWaveVFXPrefab: {fileID: 4176960486623325862, guid: 96bad36815b0915439e53eaac4f594fb, type: 3}
+  acidWaveVFXSpawnPoint: {fileID: 8258571975531539902}
+  acidVFXLifetime: 1.5
+--- !u!1 &3568673297925602684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8258571975531539902}
+  m_Layer: 0
+  m_Name: AcidWaveSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8258571975531539902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3568673297925602684}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6212233062122021789}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5912595046620471174
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +276,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8029896603409164143}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8790796688110257784
+--- !u!1 &7635227590590357149
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,44 +284,29 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8927333617825379018}
-  - component: {fileID: 4762770925175724904}
+  - component: {fileID: 6997708715535682069}
   m_Layer: 0
-  m_Name: WaterBossLogic
+  m_Name: WaterSnipeSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8927333617825379018
+--- !u!4 &6997708715535682069
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8790796688110257784}
+  m_GameObject: {fileID: 7635227590590357149}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.172, z: 0.603}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6212233062122021789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4762770925175724904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8790796688110257784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31994159255401341857216d7d2b895c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totemName: Water
-  health: {fileID: 0}
 --- !u!1001 &1006443241610078760
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,13 +20,25 @@ public class WaterBossController : MonoBehaviour
     [Header("Attack Timing")]
     public float globalAttackLock = 0.5f;
 
-    [Header("water Prison")]
+    [Header("Water Prison")]
     public bool waterPrisonEnabled = true;
     public bool waterPrisonAvoidable = false;
     public float waterPrisonCoolDown = 14f;
     public float waterPrisonTelegraph = 0.7f;
     public float waterPrisonDuration = 2.5f;
     public int waterPrisonDamageChunk = 20;
+
+    [Header("Water Prison VFX")]
+    public GameObject prisonWarningPrefab;
+    public GameObject prisonBubblePrefab;
+    public float prisonBubbleYOffset = 1f;
+
+    [Header("Water Prison Minions")]
+    public GameObject[] prisonMinionPrefabs;
+    public int minionsMin = 2;
+    public int minionsMax = 3;
+    public float spawnRadius = 4f;
+    public float minionLifeTime = 13f;
 
     [Header("Hydro Snipe")]
     public bool hydroSnipeEnabled = true;
@@ -41,12 +53,21 @@ public class WaterBossController : MonoBehaviour
     public int acidTickDamage = 2;
     public float acidStartDelay = 1.5f;
 
+    [Header("Acid Waves VFX")]
+    public GameObject acidWaveVFXPrefab;
+    public Transform acidWaveVFXSpawnPoint;
+    public float acidVFXLifetime = 1.5f;
+    public bool acidSpawnAcrossArena = true;
+    public int acidVFXCount = 16;
+    public float acidArenaVFXRadius = 12f;
+
     private float nextPrisonTime;
     private float nextSnipeTime;
 
     private bool isDead;
     private bool isBusy;
     private int strafeDir = 1;
+    private bool acidSpawnAcrossArenaVFX;
 
     private void Start()
     {
@@ -70,7 +91,7 @@ public class WaterBossController : MonoBehaviour
 
     private void Update()
     {
-        if (player == null || arenaCenter == null) { return; }
+        if (isDead || player == null || arenaCenter == null) { return; }
 
         float dist = Vector3.Distance(transform.position, player.position);
         if (dist > engageRange)
@@ -187,20 +208,61 @@ public class WaterBossController : MonoBehaviour
         isBusy = false;
     }
 
+    [System.Obsolete]
     private IEnumerator WaterPrisonAttack()
     {
         isBusy = true;
         nextPrisonTime = Time.time + waterPrisonCoolDown;
 
+        if (player== null)
+        {
+            isBusy= false;
+            yield break;
+        }
+
+        GameObject warning = null;
+        if (prisonWarningPrefab != null)
+        {
+            Vector3 warnPos = new Vector3(player.position.x, player.position.y + 0.05f, player.position.z);
+            warning = Instantiate(prisonWarningPrefab, warnPos, Quaternion.identity);
+        }
+
         yield return new WaitForSeconds(waterPrisonTelegraph);
+
+        if (isDead) { yield break; }
 
         PlayerPrisonTarget prisonTarget = player.GetComponent<PlayerPrisonTarget>();
         if (prisonTarget != null)
         {
-            bool dodged = waterPrisonAvoidable && prisonTarget.TryDodgePrison();
-            if (!dodged)
+            GameObject bubble = null;
+            if (prisonBubblePrefab != null)
             {
-                prisonTarget.ApplyPrison(waterPrisonDuration, waterPrisonDamageChunk);
+                Vector3 bubblepos = player.position + new Vector3(0f, prisonBubbleYOffset, 0f);
+                bubble = Instantiate(prisonBubblePrefab, bubblepos, Quaternion.identity);
+
+                FollowTarget followTarget = bubble.GetComponent<FollowTarget>();
+                if (followTarget != null)
+                {
+                    followTarget.target = player;
+                    followTarget.offset = new Vector3(0f, prisonBubbleYOffset, 0f);
+                }
+            }
+
+            var spawnedMinions = SpawnPrisonMinionsTracked();
+
+            prisonTarget.ApplyPrison(waterPrisonDuration, waterPrisonDamageChunk);
+
+            yield return new WaitForSeconds(waterPrisonDuration);
+
+            if (spawnedMinions != null)
+            {
+                foreach (var minion in spawnedMinions)
+                {
+                    if (minion != null)
+                    {
+                        Destroy(minion);
+                    }
+                }
             }
         }
 
@@ -216,6 +278,15 @@ public class WaterBossController : MonoBehaviour
         {
             if (player != null)
             {
+                Transform spawnT = acidWaveVFXSpawnPoint != null ? acidWaveVFXSpawnPoint : arenaCenter;
+                if (spawnT != null && spawnT != null)
+                {
+                    GameObject vfx = Instantiate(acidWaveVFXPrefab, spawnT.position, Quaternion.identity);
+                    Destroy(vfx, acidVFXLifetime);
+                }
+
+                SpawnAcidArenaVFX();
+
                 Health playerHealth = player.GetComponent<Health>();
                 if (playerHealth != null)
                 {
@@ -227,5 +298,53 @@ public class WaterBossController : MonoBehaviour
         }
     }
 
-    
+    private GameObject[] SpawnPrisonMinionsTracked()
+    {
+        if (prisonMinionPrefabs == null || prisonMinionPrefabs.Length == 0) { return null; }
+        if (player == null) { return null; }
+
+        int count = Random.Range(minionsMin, minionsMax + 1);
+        GameObject[] spawned = new GameObject[count];
+
+        for (int i = 0; i < count; ++i)
+        {
+            Vector2 r = Random.insideUnitCircle.normalized * spawnRadius;
+            Vector3 spawnPos = player.position + new Vector3(r.x, 0f, r.y);
+
+            GameObject prefab = prisonMinionPrefabs[Random.Range(0, prisonMinionPrefabs.Length)];
+            spawned[i] = Instantiate(prefab, spawnPos, Quaternion.identity);
+        }
+
+        return spawned;
+    }
+
+    private void SpawnAcidArenaVFX()
+    {
+        if ( acidWaveVFXPrefab == null)
+        {
+            return;
+        }
+
+        Vector3 center = (arenaCenter != null) ? arenaCenter.position : transform.position;
+
+        if (!acidSpawnAcrossArenaVFX)
+        {
+            GameObject one = Instantiate(acidWaveVFXPrefab, center, Quaternion.identity);
+            Destroy(one, acidVFXLifetime);
+            return;
+        }
+
+        for (int i = 0; i < acidVFXCount; ++i)
+        {
+            float t = (float)i / acidVFXCount;
+            float angle = t * Mathf.PI * 2f;
+
+            Vector3 pos = center + new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * acidArenaVFXRadius;
+            GameObject vfx = Instantiate(acidWaveVFXPrefab, pos, Quaternion.identity);
+            Destroy(vfx, acidVFXLifetime);
+        }
+
+        GameObject c = Instantiate(acidWaveVFXPrefab, center, Quaternion .identity);
+        Destroy(c, acidVFXLifetime);
+    }
 }
