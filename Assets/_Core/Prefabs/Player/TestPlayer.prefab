@@ -334,10 +334,10 @@ GameObject:
   - component: {fileID: 1003385314326942328}
   - component: {fileID: 2574155652220264893}
   - component: {fileID: 4035923733584775920}
-  - component: {fileID: 5937860595266611139}
   - component: {fileID: 4271469083888855036}
   - component: {fileID: 7374198137041799022}
   - component: {fileID: 8146465473942484286}
+  - component: {fileID: 8105918880731403094}
   m_Layer: 8
   m_Name: TestPlayer
   m_TagString: Player
@@ -458,6 +458,10 @@ MonoBehaviour:
   speed: 5
   gravity: -9.81
   jumpHeight: 2
+  attackPoint: {fileID: 162538309292005557}
+  projectilePrefab: {fileID: 8633150697324505115, guid: 59946406bdac00442a7640aea6d8fd87, type: 3}
+  fireCooldown: 0.25
+  isFrozen: 0
 --- !u!114 &6514479583167794120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,7 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaae933b7ec971846940ab7482057071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 7000
   currentHealth: 0
 --- !u!114 &4035923733584775920
 MonoBehaviour:
@@ -528,21 +532,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1942c556d49bfa489ecf9bfcb834ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5937860595266611139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3390133312596369509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6e841cedd8cee744855e56940044963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackPoint: {fileID: 162538309292005557}
-  projectilePrefab: {fileID: 8633150697324505115, guid: 59946406bdac00442a7640aea6d8fd87, type: 3}
-  fireCoolDown: 0.25
 --- !u!114 &4271469083888855036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,10 +561,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ebcb1f042147e49a538658aae7de1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementScriptToDisable: {fileID: 2759177606865065532}
-  dodgeWindiwSeconds: 0.25
-  dodgeSpeedThreshold: 7.5
+  scriptToDisable: []
   playerRigidbody: {fileID: 8146465473942484286}
+  prisonActive: 0
 --- !u!54 &8146465473942484286
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -603,6 +591,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8105918880731403094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390133312596369509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a495b38cbee25343b93b43f4e0ae23e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stacks: 0
+  maxStacks: 7
+  slowPerStack: 0.08
+  stackDuration: 6
 --- !u!1 &3512354626518941891
 GameObject:
   m_ObjectHideFlags: 0

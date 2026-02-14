@@ -181,9 +181,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6370077127094705125}
+  - component: {fileID: 7555891685491926479}
+  - component: {fileID: 1464495278742550890}
   m_Layer: 0
   m_Name: IceBossRoot
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -201,56 +203,42 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4032352555895386977}
   - {fileID: 4239912974946438434}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7987768502692473578
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4032352555895386977}
-  - component: {fileID: 1973334184541784825}
-  m_Layer: 0
-  m_Name: IceBossLogic
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4032352555895386977
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7987768502692473578}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6370077127094705125}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1973334184541784825
+--- !u!114 &7555891685491926479
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7987768502692473578}
+  m_GameObject: {fileID: 5728641152694627548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31994159255401341857216d7d2b895c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fd45aa44aa923a4ca12256120015b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totemName: Ice
-  health: {fileID: 0}
+  player: {fileID: 0}
+  telegraphPrefab: {fileID: 7587211287810714268, guid: d90fa099ac162a8489664d766f77d50b, type: 3}
+  spikePrefab: {fileID: 4258193783421602794, guid: f25307bad0b92dd448a3245865bae70c, type: 3}
+  frostNovaPrefab: {fileID: 6398284863290551884, guid: 39a4cc59349dede44a09d15cd101e4ae, type: 3}
+  prisonPrefab: {fileID: 4369551710845199358, guid: c9c3f64ffe6ef8a46bfea3dfbc2d4274, type: 3}
+  blizzardPrefab: {fileID: 2915092583427576257, guid: bbbe016c8dd3fec4eafb8e055214caca, type: 3}
+  hp: 100
+--- !u!114 &1464495278742550890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5728641152694627548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaae933b7ec971846940ab7482057071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 2500
+  currentHealth: 0
 --- !u!1 &8839462035670471128
 GameObject:
   m_ObjectHideFlags: 0

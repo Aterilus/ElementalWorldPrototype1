@@ -469,6 +469,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WindBossRoot
       objectReference: {fileID: 0}
+    - target: {fileID: 1855564508485120124, guid: d5207505fd9d2c042af3a110fca703c2, type: 3}
+      propertyPath: maxHealth
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6053255977508347198, guid: d5207505fd9d2c042af3a110fca703c2, type: 3}
       propertyPath: player
       value: 
@@ -518,76 +522,61 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5207505fd9d2c042af3a110fca703c2, type: 3}
+--- !u!1 &1273920533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1273920535}
+  - component: {fileID: 1273920534}
+  m_Layer: 0
+  m_Name: ExitGate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1273920534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273920533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 707502b703653bd41a9386518f9c5b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openWorldSceneName: OpenWorld
+  bossHealth: {fileID: 562296002}
+  playerHealth: {fileID: 615076374}
+  returnGatePrefab: {fileID: 5444300381915244487, guid: 942c234b3a1245b4c9c7a43a147e7dfe, type: 3}
+  gateSpawnPoint: {fileID: 1273920535}
+  playerDeathMessage: You aren't ready, train more to defeat thie boss.
+--- !u!4 &1273920535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273920533}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -74.194, y: 3, z: 166.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1322079317 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 162538309292005557, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
   m_PrefabInstance: {fileID: 640560293}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2741733322750895826
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1851178572337073480, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 51.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851178572337073480, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851178572337073480, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 13.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851178572337073480, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.6908825
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851178572337073480, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851178572337073480, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7229671
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851178572337073480, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851178572337073480, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851178572337073480, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -92.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1851178572337073480, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3408581694952539085, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: bossHealth
-      value: 
-      objectReference: {fileID: 562296002}
-    - target: {fileID: 3408581694952539085, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: playerHealth
-      value: 
-      objectReference: {fileID: 615076374}
-    - target: {fileID: 8285442122585336427, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
-      propertyPath: m_Name
-      value: GateSpawner
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3b229493dba4a624b8f5a4a467ce328a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -596,4 +585,4 @@ SceneRoots:
   - {fileID: 949838086}
   - {fileID: 640560293}
   - {fileID: 965549163}
-  - {fileID: 2741733322750895826}
+  - {fileID: 1273920535}

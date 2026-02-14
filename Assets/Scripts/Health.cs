@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
 
     public bool IsDead => currentHealth <= 0f;
 
+    public event Action<int> OnDamaged;
     public event Action<Health> OnDied;
 
     private bool died;
@@ -55,6 +56,13 @@ public class Health : MonoBehaviour
         }
 
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+    }
+
+    public float HealthPercent01()
+    {
+        if (maxHealth <= 0)
+        { return 0f; }
+        return (float)currentHealth / maxHealth;
     }
 
     private void Die()
