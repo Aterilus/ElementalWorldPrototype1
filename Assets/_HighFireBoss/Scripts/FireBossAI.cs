@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
+[DisallowMultipleComponent]
 public class FireBossAI : MonoBehaviour
 {
     [Header("Rreferences")]
     public Transform player;
-    public Transform fireBoss;
     public Animator anim;
     public Rigidbody body;
 
@@ -16,50 +15,44 @@ public class FireBossAI : MonoBehaviour
     public GameObject meteorPrefab;
     public GameObject fireballProjectilePrefab;
     public GameObject auraVFXPrefab;
+    public GameObject dashTrailPrefab;
     public Transform fireballMuzzle;
+    public Transform dashTrailSpawn;
 
-    [Header("Arena / Movement")]
+    [Header("Arena")]
     public Transform arenaCenter;
     public float arenaRadius = 18f;
 
-    [Header("Health")]
+    [Header("Health / Enrage State")]
     public Health maxHP;
     public float currentHP;
-
-    //[Header("Core State")]
-    private enum BossState
-    {
-        Idle,
-        Chasing,
-        Recovering,
-        Attacking,
-        Stunned,
-        Dead
-    }
-    private BossState bossState = BossState.Idle;
-
-    private bool isBusy = false;
     private bool isEnraged = false;
+    public float enragedDamageMultiplier = 1.5f;
+    public float enragedCooldownMultiplier = 0.75f;
+    public float baseDamageMultiplier = 1.0f;
 
+    [Header("Movement")]
     public float rotateSpeed = 12f;
     public float desiredCombatRange = 6f;
+    public float chaseSpeed = 6.5f;
+    public float chaseSpeedEnraged = 8.5f;
 
-    [Header("Damage / Multiplier")]
-    public float baseDamageMultiplier = 1.0f;
-    public float enragedDamageMultiplier = 1.5f;
+    [Header("Layers")]
+    public LayerMask groundMask;
+    public LayerMask playerMask;
 
     [Header("Timers and Cooldown")]
     public float meteorCooldown = 7.0f;
-    public float meteorTime;
+    public float meteor;
 
     public float dashCooldown = 2.0f;
-    public float dashTime;
+    public float dash;
 
     public float pillarCooldown = 3.5f;
-    public float pillarTime;
+    public float pillar;
 
     public float fireballCooldown = 4.0f;
-    public float fireballTime;
+    public float fireball;
 
     [Header("Attack Data")]
     [Header("Dash")]
@@ -68,60 +61,67 @@ public class FireBossAI : MonoBehaviour
     public float dashSpeed = 25f;
     public float dashDamage = 20f;
     public float dashHitRadius = 2.0f;
+    public float dashSplashRadius = 3f;
+    public float dashTrailDuration = 0.25f;
+    public float dashTrailtickRate = 0.25f;
+    public float dashTrailDamagePerTick = 6f;
 
     [Header("Pillaers")]
     public int pillarsCount = 3;
+    public float pillarRadiusFromPlayer = 4f;
+    public float pillarAoERadiuls = 2.2f;
     public float pillarTelegraphTime = 0.8f;
     public float pillarLifetime = 2.2f;
     public float pillarDamagePerTick = 7f;
     public float pillarTickRate = 0.25f;
 
     [Header("Fireball")]
-    public float fireballChargeTime = 1.2f;
+    public float fireballLifetime = 7f;
     public float fireballSpeed = 35f;
     public float fireballDamage = 40f;
 
-    public float enragedCooldownMultiplier = 0.75f;
+    [Header("Enraged Fireball")]
+    public float enragedChargeTime = 1.2f;
+    public float enragedFireballSpeed = 38f;
+    public float enragedFireBallDamage = 45f;
+
+    [Header("Meteor Drop")]
+    public int meteorCount = 8;
+    public float meteorTelegraphTime = 0.9f;
+    public float meteorSpawnHeight = 20f;
+    public float meteorImpactRadius = 2.6f;
+    public float meteorImpactDamage = 25f;
+    public float meteorFallSpeed = 22f;
+
+    private bool isBusy = false;
 
     public void Start()
     {
-        if (fireBoss != null)
+        if (body == null) { GetComponent<Rigidbody>(); }
+        Health bossHealth = GetComponent<Health>();
+        if (bossHealth != null)
         {
-            Health bossHealth = GetComponent<Health>();
             currentHP = bossHealth.maxHealth;
         }
-       
         SetAura(false);
-
-        dashTime = -999f;
-        pillarTime = -999f;
-        meteorTime = -999f;
-        fireballTime = -999f;
-
-        bossState = BossState.Chasing;
     }
 
+    [System.Obsolete]
     public void Update()
     {
-        if (bossState == BossState.Dead)
-        {
-            return;
-        }
-        if (player == null)
-        {
-            return;
-        }
+        if(player == null || isBusy) { return; }
 
         CheckEnrage();
         FacePlayerSmooth();
         MaintainArenaBounds();
 
-        if (isBusy) { return; }
-
         float dist = DistanceToPlayerFlat();
         if (dist > desiredCombatRange)
         {
-            bossState = BossState.Attacking;
+            ChasePlayerFlat();
+        }
+        else
+        {
             ChooseAndExecuteAttack();
         }
     }
@@ -130,31 +130,22 @@ public class FireBossAI : MonoBehaviour
 
     private void CheckEnrage()
     {
-        if (fireBoss != null)
+       if (isEnraged) { return; }
+       Health bossHealth = GetComponent<Health>();
+       if (currentHP <= bossHealth.maxHealth * 0.5f)
         {
-            Health bossHealth = GetComponent<Health>();
-            currentHP = bossHealth.maxHealth;
-            if (!isEnraged && currentHP <= bossHealth.maxHealth * 0.5f)
-            {
-                EnterEnrageMode();
-            }
+            isEnraged = true;
+            baseDamageMultiplier = enragedDamageMultiplier;
+            SetAura(true);
+
+            pillar *= enragedCooldownMultiplier;
+            meteor *= enragedCooldownMultiplier;
+            fireball *= enragedCooldownMultiplier;
+            dash *= enragedCooldownMultiplier;
+
+            rotateSpeed *= 2f;
         }
-    }
-
-    private void EnterEnrageMode()
-    {
-        isEnraged = true;
-        baseDamageMultiplier = enragedDamageMultiplier;
-
-        SetAura(true);
-
-        dashCooldown *= enragedCooldownMultiplier;
-        pillarCooldown *= enragedCooldownMultiplier;
-        meteorCooldown *= enragedCooldownMultiplier;
-        fireballCooldown *= enragedCooldownMultiplier;
-
-        rotateSpeed *= 1.15f;
-    }    
+    }   
 
     private void SetAura(bool on)
     {
@@ -162,87 +153,135 @@ public class FireBossAI : MonoBehaviour
         {
             auraVFXPrefab.SetActive(on);
         }
-    }    
+    }
 
+    [System.Obsolete]
     private void ChooseAndExecuteAttack()
     {
-        if (isEnraged && IsReady(fireballTime, fireballCooldown))
+        if (!isEnraged && IsReady(fireball, fireballCooldown)) 
         {
             StartCoroutine(Fireball());
+            return; 
+        }
+        if (isEnraged && IsReady(fireball, fireballCooldown))
+        {
+            StartCoroutine(FireballCharged());
             return;
         }
 
-        if (isEnraged && IsReady(dashTime, dashCooldown))
+        if (IsReady(dash, dashCooldown))
         {
             StartCoroutine(Dash());
             return;
         }
 
-        if (isEnraged && IsReady(pillarTime, pillarCooldown))
+        if (IsReady(pillar, pillarCooldown))
         {
             StartCoroutine(FlamePillars());
             return;
         }
 
-        if (isEnraged && IsReady(meteorTime, meteorCooldown))
+        if (IsReady(meteor, meteorCooldown))
         {
             StartCoroutine(MeteorBurst());
             return;
         }
+
+        StartCoroutine(MicroReposition());
     }
 
-    private bool IsReady(float lastTime, float cooldown)
-    {
-        return Time.time >= lastTime + cooldown;
-    }
+    private bool IsReady(float lastTime, float cooldown) => Time.time >= lastTime + cooldown;
 
+    [System.Obsolete]
     public IEnumerator Dash()
     {
         isBusy = true;
-        dashTime = Time.time;
+        dash = Time.time;
+
+        body.velocity = Vector3.zero;
 
         yield return new WaitForSeconds(dashWindup);
 
         Vector3 toPlayer = player.position - transform.position;
         toPlayer.y = 0f;
-        Vector3 dashDir = toPlayer.normalized;
+        Vector3 dashDir =( toPlayer.sqrMagnitude < 0.01f) ? transform.forward : toPlayer.normalized;
+
+        if (dashTrailPrefab != null)
+        {
+            Vector3 trailPos = dashTrailSpawn != null ? dashTrailSpawn.position : transform.position;
+            GameObject trail = Instantiate(dashTrailPrefab, trailPos, Quaternion.identity);
+
+            var t = trail.GetComponent<BurningTrail>();
+            if (t != null)
+            {
+                t.Init(dashTrailDamagePerTick * baseDamageMultiplier, dashTrailtickRate, dashTrailDuration, playerMask);
+                t.Follow(transform);
+            }
+
+            Destroy(trail, dashTrailDuration + 0.05f);
+        }
 
         float endTime = Time.time + dashDuration;
+        bool didHit = false;
 
         while (Time.time < endTime)
         {
-            body.angularVelocity = dashDir * dashSpeed;
-            if (Physics.CheckSphere(transform.position, dashHitRadius))
+            body.velocity = dashDir * dashSpeed;
+            if (!didHit)
             {
-                Health playerHealth = GetComponent<Health>();
-                if (playerHealth != null)
+                //Health playerHealth = GetComponent<Health>();
+                //if (playerHealth != null)
+                //{
+                //    playerHealth.TakeDamage(dashDamage);
+                //}
+
+                Collider[] hits = Physics.OverlapSphere(transform.position, dashHitRadius, playerMask);
+                if (hits.Length > 0)
                 {
-                    playerHealth.TakeDamage(dashDamage);
+                    didHit = true;
+                    DealSplashDamage(transform.position, dashSplashRadius, dashDamage * baseDamageMultiplier);
                 }
             }
             yield return null;
         }
 
+        body.velocity = Vector3.zero;
+
         yield return new WaitForSeconds(0.2f);
         isBusy = false;
+    }
+
+    private void DealSplashDamage(Vector3 center, float radius, float damage)
+    {
+        Collider[] hits = Physics.OverlapSphere(center, radius, playerMask);
+
+        for (int i = 0; i < hits.Length; ++i)
+        {
+            var hp = hits[i].GetComponentInParent<Health>();
+            if (hp != null)
+            {
+                hp.TakeDamage(damage);
+                break;
+            }
+        }
     }
 
     private IEnumerator FlamePillars()
     {
         isBusy = true;
-        pillarTime = Time.time;
+        pillar = Time.time;
 
         anim.SetTrigger("CastPillars");
 
         Vector3 basePos = player.position;
-        basePos.y = arenaCenter.position.y;
 
         for (int i = 0; i < pillarsCount; ++i)
         {
-            Vector3 p = GetRandomPointNear(basePos, 3.5f);
+            Vector3 p = GetRandomPointNear(basePos, pillarRadiusFromPlayer);
+            p = SnapToGround(p);
             p = ClampToArena(p);
 
-            GameObject warn = SpawnWarning(p, pillarTelegraphTime);
+            SpawnWarning(p, pillarTelegraphTime);
 
             StartCoroutine(SpawnPillarAfterDelay(p, pillarTelegraphTime));
         }
@@ -261,80 +300,106 @@ public class FireBossAI : MonoBehaviour
             pillar = Instantiate(flamePillarPrefab, pos, Quaternion.identity);
         }
 
-        StartCoroutine(PillarDamageTick(pillar));
-
-        if (pillar != null)
+        var aoe = pillar.GetComponent<FlamePillarAoE>();
+        if (aoe != null)
         {
-            Destroy(pillar, pillarLifetime);
+            aoe.Init(pillarDamagePerTick * baseDamageMultiplier, pillarTickRate, pillarLifetime, pillarAoERadiuls, playerMask);
         }
+
+        Destroy(pillar, pillarLifetime + 0.05f);
     }
 
     private IEnumerator MeteorBurst()
     {
         isBusy = true;
-        meteorTime = Time.time;
+        meteor = Time.time;
 
-        anim.SetTrigger("Meteor");
+        //anim.SetTrigger("Meteor");
 
-        int count = 5;
-        float telegraph = 0.08f;
-
-        for (int i = 0; i < count; ++i)
+        for (int i = 0; i < meteorCount; ++i)
         {
             Vector3 p = GetRandomPointInArena();
-            SpawnWarning(p, telegraph);
-            StartCoroutine(SpawnMeteorAfterDelay(p, telegraph));
+            p = SnapToGround(p);
+            SpawnWarning(p, meteorTelegraphTime);
+            StartCoroutine(SpawnMeteorAfterDelay(p, meteorTelegraphTime));
         }
 
         yield return new WaitForSeconds(0.25f);
         isBusy = false;
     }
 
-    private IEnumerator SpawnMeteorAfterDelay(Vector3 pos, float delay)
+    private IEnumerator SpawnMeteorAfterDelay(Vector3 impactPoint, float delay)
     {
         yield return new WaitForSeconds(delay);
 
-        Vector3 spawnPos = pos + Vector3.up * 18f;
+        if (meteorPrefab == null) { yield break; }
 
-        if (meteorPrefab != null)
+        Vector3 spawnPos = impactPoint + Vector3.up * meteorSpawnHeight;
+
+        GameObject meteor = Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
+
+        var proj = meteor.GetComponent<MeteorProjectile>();
+        if (proj != null)
         {
-            Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
+            proj.Init(impactPoint, meteorFallSpeed, meteorImpactDamage * baseDamageMultiplier, meteorImpactRadius, playerMask);
         }
     }
 
+    [System.Obsolete]
     private IEnumerator Fireball()
     {
         isBusy = true;
-        fireballTime = Time.time;
+        fireball = Time.time;
 
-        anim.SetTrigger("ChargeFireBall");
+        body.velocity = Vector3.zero;
 
-        body.angularVelocity = Vector3.zero;
-        yield return new WaitForSeconds(fireballChargeTime);
+        // anim.SetTrigger("ChargeFireBall");
+
+        yield return new WaitForSeconds(0.15f);
 
         Vector3 dir = (player.position - fireballMuzzle.position);
         dir.y = 0f;
         dir = dir.normalized;
 
-        SpawnFireball(fireballMuzzle.position, dir);
+        SpawnFireball(dir, fireballSpeed, fireballDamage * baseDamageMultiplier, false);
 
         yield return new WaitForSeconds(0.15f);
         isBusy = false;
     }
 
-    private IEnumerator SpawnFireball(Vector3 pos, Vector3 dir)
+    [System.Obsolete]
+    private IEnumerator FireballCharged()
     {
-        if (fireballProjectilePrefab != null)
-        {
-            return null;
-        }
+        isBusy = true;
+        fireball = Time.time;
 
+        body.velocity = Vector3.zero;
+
+        //anim.SetTrigger("ChargeFireBall");
+
+        yield return new WaitForSeconds(enragedChargeTime);
+
+        Vector3 dir = (player.position - fireballMuzzle.position);
+        dir.y = 0f;
+        dir = dir.normalized;
+
+        SpawnFireball(dir, enragedFireballSpeed, enragedFireBallDamage * baseDamageMultiplier, true);
+
+        yield return new WaitForSeconds(0.15f);
+        isBusy = false;
+    }
+
+    private void SpawnFireball(Vector3 dir, float speed, float damage, bool charged)
+    {
+        if (fireballProjectilePrefab == null || fireballMuzzle == null) { return; }
+        
         Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
-        GameObject proj = Instantiate(fireballProjectilePrefab, pos, rot);
-
-        proj.GetComponent<Fireball>().Init(dir, fireballSpeed, fireballDamage * baseDamageMultiplier);
-
-        yield return new WaitForSeconds(fireballCooldown);
+        GameObject fb = Instantiate(fireballProjectilePrefab, fireballMuzzle .position, rot);
+        var proj = fb.GetComponent<Fireball>();
+        if (proj != null)
+        {
+            proj.Init(dir, speed, damage, fireballLifetime, playerMask, charged);
+        }
     }
 
     private IEnumerator MicroReposition()
@@ -343,7 +408,7 @@ public class FireBossAI : MonoBehaviour
 
         Vector3 toPlayer = player.position - transform.position;
         toPlayer.y = 0f;
-        Vector3 foward = toPlayer.normalized;
+        Vector3 foward = (toPlayer.sqrMagnitude < 0.01f) ? transform.forward : toPlayer.normalized;
         Vector3 right = Vector3.Cross(Vector3.up, foward).normalized;
 
         float sign = (Random.value < 0.5f) ? -1f : 1f;
@@ -381,9 +446,10 @@ public class FireBossAI : MonoBehaviour
     {
         Vector3 toPlayer = player.position - transform.position;
         toPlayer.y = 0f;
+        if (toPlayer.sqrMagnitude < 0.0001f) { return; }
 
         Vector3 dir = toPlayer.normalized;
-        float moveSpeed = isEnraged ? 7.5f : 6.5f;
+        float moveSpeed = isEnraged ? chaseSpeedEnraged : chaseSpeed;
 
         Vector3 next = transform.position + dir * moveSpeed * Time.deltaTime;
         next = ClampToArena(next);
@@ -401,11 +467,21 @@ public class FireBossAI : MonoBehaviour
 
     private void MaintainArenaBounds()
     {
-        Vector3 clamp = ClampToArena(transform.position);
-        if ((clamp - transform.position).sqrMagnitude > 0.0001f)
-        {
-            body.MovePosition(clamp);
-        }
+        Vector3 center = arenaCenter.position;
+        Vector3 pos = transform.position;
+
+        Vector3 offset = pos - center;
+        offset.y = 0f;
+
+        float dist = offset.magnitude;
+        if (dist <= arenaRadius) { return; }
+
+        Vector3 clampedOffset = offset.normalized * arenaRadius;
+        Vector3 clampedPos = center + clampedOffset;
+        clampedPos.y = pos.y;
+
+        body.MovePosition(clampedPos);
+        
     }
 
     private Vector3 ClampToArena(Vector3 pos)
@@ -430,15 +506,23 @@ public class FireBossAI : MonoBehaviour
     private Vector3 GetRandomPointInArena()
     {
         Vector2 r = Random.insideUnitCircle * arenaRadius;
-        Vector3 p = arenaCenter.position + new Vector3(r.x, 0f, r.y);
-        return p;
+        return arenaCenter.position + new Vector3(r.x, 0f, r.y);
     }
 
     private Vector3 GetRandomPointNear(Vector3 origin, float radius)
     {
         Vector2 r = Random.insideUnitCircle * radius;
-        Vector3 p = origin + new Vector3(r.x, 0f, r.y);
-        return p;
+        return origin + new Vector3(r.x, 0f, r.y);
+    }
+
+    private Vector3 SnapToGround(Vector3 pos)
+    {
+        Ray ray = new Ray(pos + Vector3.up * 15f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 50f, groundMask))
+        {
+            return hit.point;
+        }
+        return pos;
     }
 
     private GameObject SpawnWarning(Vector3 pos, float duration)
@@ -448,10 +532,5 @@ public class FireBossAI : MonoBehaviour
         GameObject w = Instantiate(warningCirclePrefab, pos, Quaternion.identity);
         Destroy(w, duration);
         return w;
-    }
-
-   private void PillarDamageTick(GameObject pillar)
-    {
-
     }
 }
