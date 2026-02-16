@@ -6,7 +6,7 @@ public class FireBossAI : MonoBehaviour
 {
     [Header("Rreferences")]
     public Transform player;
-    public Animator anim;
+    //public Animator anim;
     public Rigidbody body;
 
     [Header("Prefabs")]
@@ -271,7 +271,7 @@ public class FireBossAI : MonoBehaviour
         isBusy = true;
         pillar = Time.time;
 
-        anim.SetTrigger("CastPillars");
+        //anim.SetTrigger("CastPillars");
 
         Vector3 basePos = player.position;
 

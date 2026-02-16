@@ -70,11 +70,11 @@ public class IceBossController : MonoBehaviour
                         yield return CastFrostNova(novaWindup);
                         break;
 
-                    //case 2:
-                    //    yield return CastPrison(prisonWindup, prisonFreezeSeconds);
-                    //    break;
-                
-                    case 3:
+                case 2:
+                    yield return CastPrison(prisonWindup, prisonFreezeSeconds);
+                    break;
+
+                case 3:
                         yield return CastBlizzard();
                         break;
                 }
@@ -122,28 +122,28 @@ public class IceBossController : MonoBehaviour
 
         Instantiate(frostNovaPrefab,transform.position, Quaternion.identity);
     }
-    //IEnumerator CastPrison(float windup, float freezeSeconds)
-    //{
-    //    if (!frostNovaPrefab)
-    //    { 
-    //        yield break;
-    //    }
+    IEnumerator CastPrison(float windup, float freezeSeconds)
+    {
+        if (!frostNovaPrefab)
+        {
+            yield break;
+        }
 
-    //    Vector3 p = player.position;
-    //    //p.y = transform.position.y;
+        Vector3 p = player.position;
+        //p.y = transform.position.y;
 
-    //    SpawnTelegraph(p, windup, 2.2f);
-    //    yield return new WaitForSeconds(windup);
+        SpawnTelegraph(p, windup, 2.2f);
+        yield return new WaitForSeconds(windup);
 
-    //    var prison = Instantiate(prisonPrefab, p, Quaternion.identity);
-    //    var fp = prison.GetComponent<FrozenPrison>();
-    //    if (fp != null)
-    //    {
-    //        fp.player = player;
-    //    }
+        var prison = Instantiate(prisonPrefab, p, Quaternion.identity);
+        var fp = prison.GetComponent<FrozenPrison>();
+        if (fp != null)
+        {
+            fp.player = player;
+        }
 
-    //    player.GetComponent<PlayerMovement>()?.Freeze(freezeSeconds);
-    //}
+        player.GetComponent<PlayerMovement>()?.Freeze(freezeSeconds);
+    }
 
     IEnumerator CastBlizzard()
     {

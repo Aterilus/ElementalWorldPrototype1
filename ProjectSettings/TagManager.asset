@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - World
   - Water
   - UI
   - 
@@ -18,7 +19,7 @@ TagManager:
   - Enemy
   - Hurtbox
   - Hitbox
-  - World
+  - 
   - 
   - 
   - 
