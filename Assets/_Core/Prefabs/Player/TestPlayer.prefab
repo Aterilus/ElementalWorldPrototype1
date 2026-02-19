@@ -338,6 +338,9 @@ GameObject:
   - component: {fileID: 7374198137041799022}
   - component: {fileID: 8146465473942484286}
   - component: {fileID: 8105918880731403094}
+  - component: {fileID: 6534445722728277438}
+  - component: {fileID: 18079577451134747}
+  - component: {fileID: 3529084357484970144}
   m_Layer: 8
   m_Name: TestPlayer
   m_TagString: Player
@@ -455,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b8e6976772d36641a2f11ab0c94e7b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 25
   gravity: -9.81
   jumpHeight: 2
   attackPoint: {fileID: 162538309292005557}
@@ -501,11 +504,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf98d22fff98984f9a305e785d6119b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 0
-  attack: 0
-  defense: 0
-  speed: 0
-  currentHP: 0
+  evPoints: 0
+  evHP: 0
+  evAttack: 0
+  evDefense: 0
+  evSpeed: 0
+  bonusMaxHP: 0
+  damageMultiplier: 1
+  damageReduction: 0
+  moveSpeedBonuses: 0
 --- !u!114 &2574155652220264893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaae933b7ec971846940ab7482057071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 7000
+  maxHealth: 250
   currentHealth: 0
 --- !u!114 &4035923733584775920
 MonoBehaviour:
@@ -607,6 +614,54 @@ MonoBehaviour:
   maxStacks: 7
   slowPerStack: 0.08
   stackDuration: 6
+--- !u!114 &6534445722728277438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390133312596369509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3fd9fdc6b4873a42bac0638b5e944da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  readinessLevel: 1
+  stats: {fileID: 18079577451134747}
+--- !u!114 &18079577451134747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390133312596369509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf98d22fff98984f9a305e785d6119b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evPoints: 0
+  evHP: 0
+  evAttack: 0
+  evDefense: 0
+  evSpeed: 0
+  bonusMaxHP: 0
+  damageMultiplier: 1
+  damageReduction: 0
+  moveSpeedBonuses: 0
+--- !u!114 &3529084357484970144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390133312596369509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b44654f3f5e8a4fbde487006480a82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 1003385314326942328}
 --- !u!1 &3512354626518941891
 GameObject:
   m_ObjectHideFlags: 0

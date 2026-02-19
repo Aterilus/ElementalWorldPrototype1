@@ -22,6 +22,10 @@ public class PlayerProgress : MonoBehaviour
     [Header("Totems (Name-based)")]
     [SerializeField] private List<string> collectedTotemsDebug = new List<string>();
     private HashSet<string> collectedTotems = new HashSet<string>();
+
+    [Min(1)] public int playerLevel = 1;
+    public int GetLevel() => playerLevel;
+
     public bool HasSolarisBlessing => hasSolarisBlessing;
     public int TotemsCollected => totemsCollected;
     public int TotemsRequiredForDarkBoss => totemsRequiredForDarkBoss;

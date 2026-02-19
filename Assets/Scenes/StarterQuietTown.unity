@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 781297380}
   - component: {fileID: 781297379}
   - component: {fileID: 781297378}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -619,10 +619,6 @@ PrefabInstance:
     - target: {fileID: 3390133312596369509, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
       propertyPath: m_Name
       value: TestPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 3390133312596369509, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

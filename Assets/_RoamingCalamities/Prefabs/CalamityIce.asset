@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3942f30e06fce82448a5dc5bbf42f735, type: 3}
+  m_Name: CalamityIce
+  m_EditorClassIdentifier: 
+  calamityName: 
+  prefab: {fileID: 3816321198428026239, guid: 3855d931e92ed3849bb80cded516372a, type: 3}
+  minDistanceFromPlayer: 60
+  maxDistanceFromPlayer: 250
+  roamSpeed: 4
+  chaseSpeed: 6
+  detectRange: 25
+  attackRange: 4
+  attackCoolDown: 2
+  repositionIfPlayerFaterThan: 400
+  repositionCoolDown: 20
+  minLevelToAttack: 5
+  maxLevelToAttack: 20
