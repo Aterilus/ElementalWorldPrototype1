@@ -37,9 +37,9 @@ public class Health : MonoBehaviour
         Debug.Log($"[Health] AFTER = {currentHealth}");
         if (currentHealth <= 0f)         
         {
-            currentHealth = 0f;
+            //currentHealth = 0f;
             Debug.Log($"[Health] {gameObject.name} is now dead.");
-            Die();
+            HandleDeath();
         }
         //currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
     }
@@ -65,11 +65,12 @@ public class Health : MonoBehaviour
         return (float)currentHealth / maxHealth;
     }
 
-    private void Die()
+    private void HandleDeath()
     {
-        if (died) { return; }
-        died = true;
-        OnDied?.Invoke(this);
+        var rep = GetComponent<CalamityDeathReporter1>();
+        Debug.Log($"{name} died. Has reporter? {(rep != null)}");
+
+        rep?.ReportDeath();
         Destroy(gameObject);
     }
 }

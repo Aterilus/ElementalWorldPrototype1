@@ -331,16 +331,15 @@ GameObject:
   - component: {fileID: 2759177606865065532}
   - component: {fileID: 6514479583167794120}
   - component: {fileID: 7937510514826294118}
-  - component: {fileID: 1003385314326942328}
   - component: {fileID: 2574155652220264893}
   - component: {fileID: 4035923733584775920}
   - component: {fileID: 4271469083888855036}
   - component: {fileID: 7374198137041799022}
-  - component: {fileID: 8146465473942484286}
   - component: {fileID: 8105918880731403094}
   - component: {fileID: 6534445722728277438}
   - component: {fileID: 18079577451134747}
   - component: {fileID: 3529084357484970144}
+  - component: {fileID: 1158126250468888017}
   m_Layer: 8
   m_Name: TestPlayer
   m_TagString: Player
@@ -431,7 +430,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -492,27 +491,6 @@ MonoBehaviour:
   hitboxPrefab: {fileID: 3170349017078042728}
   hitboxSpawnPoint: {fileID: 4987939949616957751}
   attackCooldown: 1
---- !u!114 &1003385314326942328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3390133312596369509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bf98d22fff98984f9a305e785d6119b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  evPoints: 0
-  evHP: 0
-  evAttack: 0
-  evDefense: 0
-  evSpeed: 0
-  bonusMaxHP: 0
-  damageMultiplier: 1
-  damageReduction: 0
-  moveSpeedBonuses: 0
 --- !u!114 &2574155652220264893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,35 +547,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scriptToDisable: []
-  playerRigidbody: {fileID: 8146465473942484286}
+  playerRigidbody: {fileID: 0}
   prisonActive: 0
---- !u!54 &8146465473942484286
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3390133312596369509}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &8105918880731403094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,7 +612,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b44654f3f5e8a4fbde487006480a82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 1003385314326942328}
+  stats: {fileID: 0}
+--- !u!136 &1158126250468888017
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390133312596369509}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3512354626518941891
 GameObject:
   m_ObjectHideFlags: 0

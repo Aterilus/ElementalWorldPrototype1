@@ -18,10 +18,10 @@ MonoBehaviour:
   maxDistanceFromPlayer: 250
   roamSpeed: 4
   chaseSpeed: 6
-  detectRange: 25
-  attackRange: 4
-  attackCoolDown: 2
+  detectRange: 75
+  attackRange: 15
+  attackCoolDown: 1
   repositionIfPlayerFaterThan: 400
   repositionCoolDown: 20
   minLevelToAttack: 5
-  maxLevelToAttack: 20
+  minLevelToGoLethal: 10

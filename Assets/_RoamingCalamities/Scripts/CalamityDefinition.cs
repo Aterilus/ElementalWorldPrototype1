@@ -12,11 +12,11 @@ public class CalamityDefinition : ScriptableObject
     [Header("Roam")]
     public float roamSpeed = 4f;
     public float chaseSpeed = 6f;
-    public float detectRange = 25f;
+    public float detectRange = 50f;
 
     [Header("Attack")]
-    public float attackRange = 4f;
-    public float attackCoolDown = 2f;
+    public float attackRange = 10f;
+    public float attackCoolDown = 1f;
 
     [Header("Global feel (teleport reposition)")]
     public float repositionIfPlayerFaterThan = 400f;

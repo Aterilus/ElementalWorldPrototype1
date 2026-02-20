@@ -67,6 +67,7 @@ public class RoamingCalamityController : MonoBehaviour
 
     private void Attack()
     {
+        Debug.Log($"{name} ATTACK state. Dist to player: {Vector3.Distance(transform.position, player.position)}");
         Face(player.position);
 
         var progress = player.GetComponent<PlayerReadiness>();
@@ -75,16 +76,17 @@ public class RoamingCalamityController : MonoBehaviour
         bool canAttack = lvl >= def.minLevelToAttack;
         bool allowLethal = lvl >= def.minLevelToGoLethal;
 
-        if (!canAttack)
+        var all = GetComponents<MonoBehaviour>();
+        foreach (var t in all)
         {
-            return;
+            if (t is ICalamityAttack atk)
+            {
+                atk.Execute(transform, player, allowLethal);
+                return;
+            }
         }
 
-        var atk = GetComponent<CalamityAttackDriver>();
-        if (atk)
-        {
-            atk.DoAttack(player, allowLethal);
-        }
+        Debug.LogWarning($"{name} has no attack component implementing ICalamityAttack.");
     }
 
     private void PickNewTarget()
