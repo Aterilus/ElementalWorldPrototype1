@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class WindBossController : MonoBehaviour 
+public class WindBossController : MonoBehaviour
 {
     [Header("Target")]
     [SerializeField] private Transform player;
@@ -126,9 +126,9 @@ public class WindBossController : MonoBehaviour
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, blowbackRange);
 
-        foreach(var hit in hits)
+        foreach (var hit in hits)
         {
-            if (!hit.CompareTag("Player")) {  continue; }
+            if (!hit.CompareTag("Player")) { continue; }
 
             Rigidbody rb = hit.attachedRigidbody;
             Vector3 away = (hit.transform.position - transform.position);

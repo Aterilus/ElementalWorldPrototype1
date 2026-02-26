@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2525509351643296415
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4020376194148127342}
+  - component: {fileID: 4874027107622384629}
+  m_Layer: 0
+  m_Name: DarkSummoning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4020376194148127342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525509351643296415}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -39.82191, y: 0, z: 17.31764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4874027107622384629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525509351643296415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3a819b3e59b8674d8fbcdb75b0c1e7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clonePrefabs:
+  - {fileID: 724858005814169574, guid: 014780f23b4a38f44ad8e4c1afa2287f, type: 3}
+  - {fileID: 946512068887701893, guid: 1512e63f9cc712d4a9eeef6ecabd143e, type: 3}
+  - {fileID: 9068773034702488708, guid: 4b479cdf9d669e24f803b100fa338a42, type: 3}
+  - {fileID: 5728641152694627548, guid: 450d93921c8bcf4489c4987208597da5, type: 3}
+  - {fileID: 1631267848602813557, guid: 09216392b510d534990cfead63444f19, type: 3}
+  - {fileID: 4349667688304747467, guid: 6243be772bdd7fe40b372f56ef2320c9, type: 3}
+  windMoves:
+  - {fileID: 1918859812538185499, guid: 53f5536c5d5a28844b7e19db07107691, type: 3}
+  - {fileID: 7302420950697979121, guid: 9ee58d4768096714dbd95256a2162274, type: 3}
+  waterMoves:
+  - {fileID: 6597053348194025021, guid: 8b5e8074ea4a73341ac714013df0d2eb, type: 3}
+  - {fileID: 2023191631215308725, guid: dbfb88513f71c98499dbb4e0fe0d540f, type: 3}
+  lightningMoves:
+  - {fileID: 2145854708840102310, guid: 18ce867bc29f5e84eb40d8827ad32b5f, type: 3}
+  - {fileID: 4035556159917431006, guid: f9ad32b887b3e0b4c9844e767086cab2, type: 3}
+  iceMoves:
+  - {fileID: 4258193783421602794, guid: f25307bad0b92dd448a3245865bae70c, type: 3}
+  - {fileID: 6398284863290551884, guid: 39a4cc59349dede44a09d15cd101e4ae, type: 3}
+  fireMoves:
+  - {fileID: 8740769985183110282, guid: ddcd9c1b8526b8b4a8428d5e3a7452af, type: 3}
+  - {fileID: 9150288398472088224, guid: 703237b80d2787844b7ce0de48821666, type: 3}
+  earthMoves:
+  - {fileID: 830308544503859457, guid: 55fa486578ae479409e9d7d9089bda8e, type: 3}
+  - {fileID: 3815336754683061016, guid: d1b19d53670cf8f49a2dbcf6e1aa88d4, type: 3}
+  count: 3
+  spawnRadius: 6
+  spawnMinSeperation: 2
+  overrideHealth: 1
+  cloneMaxHealth: 120

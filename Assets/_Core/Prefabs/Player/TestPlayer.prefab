@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 18079577451134747}
   - component: {fileID: 3529084357484970144}
   - component: {fileID: 1158126250468888017}
+  - component: {fileID: 3781865746711168212}
   m_Layer: 8
   m_Name: TestPlayer
   m_TagString: Player
@@ -531,7 +532,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraPivot: {fileID: 6114379797245184407}
   playerCamera: {fileID: 70162377145726620}
-  mouseSensitivity: 200
   minPitch: -35
   maxPitch: 65
 --- !u!114 &7374198137041799022
@@ -636,6 +636,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3781865746711168212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3390133312596369509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1844f2bde06afc4fa0f41636a41df4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 2759177606865065532}
 --- !u!1 &3512354626518941891
 GameObject:
   m_ObjectHideFlags: 0

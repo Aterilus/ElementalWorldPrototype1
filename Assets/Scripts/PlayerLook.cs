@@ -8,7 +8,7 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] private Camera playerCamera;
 
     [Header("Settings")]
-    [SerializeField] private float mouseSensitivity = 200f;
+    //[SerializeField] private float mouseSensitivity = 200f;
     [SerializeField] private float minPitch = -35f;
     [SerializeField] private float maxPitch = 65f;
 

@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
 
     public bool IsDead => currentHealth <= 0f;
 
-    public event Action<int> OnDamaged;
+    //public event Action<int> OnDamaged;
     public event Action<Health> OnDied;
 
     private bool died;

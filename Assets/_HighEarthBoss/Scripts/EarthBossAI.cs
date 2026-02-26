@@ -122,7 +122,7 @@ public class EarthBossAI : MonoBehaviour
 
     private IEnumerator BoulderToss()
     {
-        if (boulderSpawnPoint != null || boulderPrefab == null)
+        if (boulderSpawnPoint == null || boulderPrefab == null)
         {
             yield break;
         }

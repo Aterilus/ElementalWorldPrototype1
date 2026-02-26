@@ -76,7 +76,7 @@ public class WaterBossController : MonoBehaviour
             GameObject plyr = GameObject.FindGameObjectWithTag("Player");
             if (plyr != null)
             {
-                player = player.transform;
+                player = plyr.transform;
             }
         }
 
@@ -89,6 +89,7 @@ public class WaterBossController : MonoBehaviour
         }
     }
 
+    [System.Obsolete]
     private void Update()
     {
         if (isDead || player == null || arenaCenter == null) { return; }

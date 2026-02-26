@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class LightningCloud : MonoBehaviour
 {
-    private LightningBossController boss;
+    private MonoBehaviour boss;
 
     [Header("lifetime")]
     public float lifetmie = 3.0f;
     private float t;
 
-    public void Init(LightningBossController owner)
+    public void Init(MonoBehaviour owner)
     {
-        boss = owner;
+        this.boss = owner;
         t = 0f;
     }
 

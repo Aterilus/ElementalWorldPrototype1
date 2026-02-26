@@ -119,6 +119,110 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &178161756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 178161759}
+  - component: {fileID: 178161758}
+  - component: {fileID: 178161757}
+  m_Layer: 0
+  m_Name: ArenaTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &178161757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178161756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b6af9d270d9bb46baa3966541eceae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  victoryPanel: {fileID: 0}
+  defeatPanel: {fileID: 0}
+  openWorldSceneName: OpenWorld
+  darkArenaSceneName: DarkBossArena
+--- !u!114 &178161758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178161756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0abdc5a0021b194f8b5df96e8380b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arenaFlow: {fileID: 178161757}
+  darkBossHealth: {fileID: 1529784290}
+--- !u!4 &178161759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178161756}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -40.07218, y: 0, z: 17.50904}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &180859979 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8701404492699908530, guid: e8746e01ca81507489947667ca41c338, type: 3}
+  m_PrefabInstance: {fileID: 5271230494401603292}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &458012773 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3821887991613562983, guid: e8746e01ca81507489947667ca41c338, type: 3}
+  m_PrefabInstance: {fileID: 5271230494401603292}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &691738051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 691738052}
+  m_Layer: 0
+  m_Name: ArenaCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &691738052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691738051}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &974271005
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +380,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2574155652220264893, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
+      propertyPath: maxHealth
+      value: 25000
+      objectReference: {fileID: 0}
     - target: {fileID: 3390133312596369509, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
       propertyPath: m_Name
       value: TestPlayer
@@ -285,6 +393,49 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
+--- !u!4 &1510172489 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2157255695173190118, guid: 3add578737c37a543a22f97a6432a6d7, type: 3}
+  m_PrefabInstance: {fileID: 1179075462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1529784290 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1193715773263954360, guid: e8746e01ca81507489947667ca41c338, type: 3}
+  m_PrefabInstance: {fileID: 5271230494401603292}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180859979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaae933b7ec971846940ab7482057071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1529784300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180859979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8124d4924b8af534c9096ff2577ff727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warningPrefab: {fileID: 2907870994609509299, guid: e7addc69308717c40880145a685441bd, type: 3}
+  shockwavePrefab: {fileID: 3815336754683061016, guid: d1b19d53670cf8f49a2dbcf6e1aa88d4, type: 3}
+  pillarPrisonPrefab: {fileID: 2431306965026289866, guid: 69736ec33e10c6f4484e848b15bfa36f, type: 3}
+  boulderPrefab: {fileID: 830308544503859457, guid: 55fa486578ae479409e9d7d9089bda8e, type: 3}
+  boulderSpawnPoint: {fileID: 458012773}
+  slamTelegraph: 1
+  prisonTelegraph: 1
+  boulderTelegraph: 0.6
+  boulderForce: 18
+  boulderUpward: 4
+  snapSpawnsToGround: 1
+  rayCastHeight: 30
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1908205964
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,6 +624,82 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1001 &5271230494401603292
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3899858474055809312, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: arenaCenter
+      value: 
+      objectReference: {fileID: 691738052}
+    - target: {fileID: 4690290532900447412, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1510172489}
+    - target: {fileID: 4690290532900447412, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: arenaFlow
+      value: 
+      objectReference: {fileID: 178161757}
+    - target: {fileID: 7863814156759531767, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -42.834118
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863814156759531767, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863814156759531767, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.50879
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863814156759531767, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863814156759531767, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863814156759531767, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863814156759531767, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863814156759531767, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863814156759531767, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863814156759531767, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486453078206508859, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: arenaCenter
+      value: 
+      objectReference: {fileID: 691738052}
+    - target: {fileID: 8701404492699908530, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      propertyPath: m_Name
+      value: DarkBossRoot
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8701404492699908530, guid: e8746e01ca81507489947667ca41c338, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1529784300}
+  m_SourcePrefab: {fileID: 100100000, guid: e8746e01ca81507489947667ca41c338, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -481,3 +708,6 @@ SceneRoots:
   - {fileID: 974271009}
   - {fileID: 1179075462}
   - {fileID: 1908205967}
+  - {fileID: 5271230494401603292}
+  - {fileID: 178161759}
+  - {fileID: 691738052}

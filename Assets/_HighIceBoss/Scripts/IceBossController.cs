@@ -41,7 +41,7 @@ public class IceBossController : MonoBehaviour
             var plyr = GameObject.FindGameObjectWithTag("Player");
             if (plyr)
             {
-                player = player.transform;
+                player = plyr.transform;
             }
         }
 
@@ -124,7 +124,7 @@ public class IceBossController : MonoBehaviour
     }
     IEnumerator CastPrison(float windup, float freezeSeconds)
     {
-        if (!frostNovaPrefab)
+        if (!prisonPrefab)
         {
             yield break;
         }
