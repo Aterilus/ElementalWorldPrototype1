@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1229203492064639807}
   - component: {fileID: 3286811362972382587}
   - component: {fileID: 698165472502638012}
+  - component: {fileID: -6887638613923081720}
   m_Layer: 0
   m_Name: DarkWindClone
   m_TagString: BossMinion
@@ -114,11 +115,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e27307c36e89e34ba39704c893eef79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedMovePrefab: {fileID: 0}
+  elemetnId: 
+  ownerBoss: {fileID: 0}
+  assignedAbility: 0
   player: {fileID: 0}
   castInterval: 4
   windup: 0.75
-  castPoint: {fileID: 0}
+--- !u!114 &-6887638613923081720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724858005814169574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f88162797a3634aa04224ea54690e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss: {fileID: 0}
+  elementId: wind
 --- !u!1 &946534127331187382
 GameObject:
   m_ObjectHideFlags: 0

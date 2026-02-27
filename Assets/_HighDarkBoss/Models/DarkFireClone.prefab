@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7587896888694367155}
   - component: {fileID: 7847666860275549327}
   - component: {fileID: 5481803799460186716}
+  - component: {fileID: -3916765681364892870}
   m_Layer: 0
   m_Name: DarkFireClone
   m_TagString: BossMinion
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -35.38674, y: 0.568, z: 57.87924}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2231874613370691757}
@@ -92,11 +93,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e27307c36e89e34ba39704c893eef79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedMovePrefab: {fileID: 0}
+  elemetnId: 
+  ownerBoss: {fileID: 0}
+  assignedAbility: 0
   player: {fileID: 0}
   castInterval: 4
   windup: 0.75
-  castPoint: {fileID: 0}
 --- !u!65 &5481803799460186716
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -118,6 +120,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3916765681364892870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631267848602813557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f88162797a3634aa04224ea54690e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boss: {fileID: 0}
+  elementId: fire
 --- !u!1 &2355230772615219435
 GameObject:
   m_ObjectHideFlags: 0

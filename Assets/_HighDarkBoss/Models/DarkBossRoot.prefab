@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 3763943577124086947}
   - component: {fileID: 1285015586574279532}
   - component: {fileID: 8486453078206508859}
+  - component: {fileID: 7283245290409589170}
   m_Layer: 9
   m_Name: DarkBossRoot
   m_TagString: Untagged
@@ -688,6 +689,33 @@ MonoBehaviour:
   meteorImpactDamage: 25
   meteorFallSpeed: 22
   baseDamageMultiplier: 1
+--- !u!114 &7283245290409589170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8124d4924b8af534c9096ff2577ff727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warningPrefab: {fileID: 2907870994609509299, guid: e7addc69308717c40880145a685441bd, type: 3}
+  shockwavePrefab: {fileID: 3815336754683061016, guid: d1b19d53670cf8f49a2dbcf6e1aa88d4, type: 3}
+  pillarPrisonPrefab: {fileID: 2431306965026289866, guid: 69736ec33e10c6f4484e848b15bfa36f, type: 3}
+  boulderPrefab: {fileID: 830308544503859457, guid: 55fa486578ae479409e9d7d9089bda8e, type: 3}
+  boulderSpawnPoint: {fileID: 3821887991613562983}
+  slamTelegraph: 1
+  prisonTelegraph: 1
+  boulderTelegraph: 0.6
+  boulderForce: 18
+  boulderUpward: 4
+  snapSpawnsToGround: 1
+  rayCastHeight: 30
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8860412756253977772
 GameObject:
   m_ObjectHideFlags: 0

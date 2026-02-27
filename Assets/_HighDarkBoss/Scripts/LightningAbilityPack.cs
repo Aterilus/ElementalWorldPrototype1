@@ -36,15 +36,19 @@ public class LightningAbilityPack : MonoBehaviour
 
     Coroutine stormRoutine;
 
-    public void CastLightningStrike(Transform target, Health targetHp)
+    public void CastLightningStrike(Transform target)
     {
         if (target == null) { return; }
+        Health targetHp = target.GetComponentInParent<Health>();
         StartCoroutine(LightningStrikeRoutine(target, targetHp));
     }
 
-    public void CastCloudChainCombo(Transform caster, NavMeshAgent casterAgent, Transform target, Health targetHp, bool warpBehind = true)
+    public void CastCloudChainCombo(Transform caster, Transform target, bool warpBehind = true)
     {
+
         if (caster == null || target == null) { return; }
+        Health targetHp = target.GetComponentInParent<Health>();
+        NavMeshAgent casterAgent = caster.GetComponentInParent<NavMeshAgent>();
         StartCoroutine(CloudChainComboRoutine(caster, casterAgent, target, targetHp, warpBehind));
     }
 

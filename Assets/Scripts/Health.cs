@@ -67,10 +67,32 @@ public class Health : MonoBehaviour
 
     private void HandleDeath()
     {
-        var rep = GetComponent<CalamityDeathReporter1>();
-        Debug.Log($"{name} died. Has reporter? {(rep != null)}");
+        var cloneAI = GetComponent<DarkCloneAI>();
+        if (cloneAI != null)
+        {
+            bool hasBoss = (cloneAI.ownerBoss != null);
+            Debug.Log($"{name} died. Clone detected. Has ownerBoss? {hasBoss}. Element = {cloneAI.elemetnId}");
 
-        rep?.ReportDeath();
+            if (hasBoss)
+            {
+                cloneAI.ownerBoss.OnCloneDefeated(cloneAI.elemetnId);
+            }
+
+            Destroy(gameObject);
+            return;
+        }
+
+        var rep = GetComponent<CalamityDeathReporter1>();
+        Debug.Log($"{name} died. Has calamity reporter? {(rep != null)}");
+
+        if (rep != null)
+        {
+            rep.ReportDeath();
+            Destroy(gameObject);
+            return;
+        }
+
+        Debug.Log($"{name} died. No reporter found. Destroying.");
         Destroy(gameObject);
     }
 }
