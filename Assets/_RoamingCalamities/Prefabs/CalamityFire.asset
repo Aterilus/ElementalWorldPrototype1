@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3942f30e06fce82448a5dc5bbf42f735, type: 3}
+  m_Name: CalamityFire
+  m_EditorClassIdentifier: 
+  calamityName: 
+  prefab: {fileID: 78395651859218398, guid: bbdfe488a8028584bb5037aa3427d2a8, type: 3}
+  minDistanceFromPlayer: 60
+  maxDistanceFromPlayer: 250
+  roamSpeed: 4
+  chaseSpeed: 6
+  detectRange: 75
+  attackRange: 15
+  attackCoolDown: 1
+  repositionIfPlayerFaterThan: 400
+  repositionCoolDown: 20
+  minLevelToAttack: 5
+  minLevelToGoLethal: 10

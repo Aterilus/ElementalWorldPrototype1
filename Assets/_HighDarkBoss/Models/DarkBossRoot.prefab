@@ -1,0 +1,751 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1124741326824348675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4468170735237579598}
+  m_Layer: 0
+  m_Name: VFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4468170735237579598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124741326824348675}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6166740860658938256}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1257193482824914542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3821887991613562983}
+  m_Layer: 0
+  m_Name: AttackSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3821887991613562983
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257193482824914542}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.827}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7863814156759531767}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2007941746833343866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2709117893001652108}
+  m_Layer: 0
+  m_Name: Visuals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2709117893001652108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007941746833343866}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7929549418671737253}
+  m_Father: {fileID: 6166740860658938256}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3858719709124978943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7929549418671737253}
+  - component: {fileID: 6548946873763329352}
+  - component: {fileID: 7671371271305305036}
+  - component: {fileID: 10681954446540119}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7929549418671737253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858719709124978943}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2709117893001652108}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6548946873763329352
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858719709124978943}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7671371271305305036
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858719709124978943}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &10681954446540119
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3858719709124978943}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8701404492699908530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7863814156759531767}
+  - component: {fileID: 9155084381285649076}
+  - component: {fileID: 4690290532900447412}
+  - component: {fileID: 1193715773263954360}
+  - component: {fileID: 3409934121582483806}
+  - component: {fileID: 3899858474055809312}
+  - component: {fileID: 3576887551862601358}
+  - component: {fileID: 3763943577124086947}
+  - component: {fileID: 1285015586574279532}
+  - component: {fileID: 8486453078206508859}
+  - component: {fileID: 7283245290409589170}
+  m_Layer: 9
+  m_Name: DarkBossRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7863814156759531767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -35.38674, y: 0.565, z: 57.87924}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6166740860658938256}
+  - {fileID: 3821887991613562983}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9155084381285649076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31994159255401341857216d7d2b895c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totemName: Dark
+  health: {fileID: 1193715773263954360}
+--- !u!114 &4690290532900447412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec463f75f2aaeb4c8ff2b7f342d8b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  castPoint: {fileID: 3821887991613562983}
+  bossHealth: {fileID: 1193715773263954360}
+  arenaFlow: {fileID: 0}
+  phase2AtHealthPercent: 0.5
+  decisionInterval: 0.75
+  abyssBrandMove:
+    moveName: Abyss Brand
+    movePrefab: {fileID: 6397559003452901810, guid: ae788ec7cebdd6049bbc466a0892d697, type: 3}
+    cooldown: 6
+    windup: 1
+    nextReadyTime: 0
+    spawnMode: 0
+    spawnRadius: 8
+    groundSnap: 1
+  summonMove:
+    moveName: Dark Summoning
+    movePrefab: {fileID: 2525509351643296415, guid: 022437bec91b7804582eaf0403a7a80a, type: 3}
+    cooldown: 25
+    windup: 1
+    nextReadyTime: 0
+    spawnMode: 0
+    spawnRadius: 8
+    groundSnap: 1
+  phase2Signature:
+  - moveName: Abyss Brand
+    movePrefab: {fileID: 6397559003452901810, guid: ae788ec7cebdd6049bbc466a0892d697, type: 3}
+    cooldown: 6
+    windup: 1
+    nextReadyTime: 0
+    spawnMode: 0
+    spawnRadius: 8
+    groundSnap: 1
+  - moveName: Shadow Chains
+    movePrefab: {fileID: 1999118578332388077, guid: bfe69ac763225074693abfba3c5a17c7, type: 3}
+    cooldown: 10
+    windup: 2
+    nextReadyTime: 0
+    spawnMode: 0
+    spawnRadius: 8
+    groundSnap: 1
+  - moveName: Umbral Rush
+    movePrefab: {fileID: 2493012344253500097, guid: 730a8845250ce25448c7d200a64d8d33, type: 3}
+    cooldown: 15
+    windup: 3
+    nextReadyTime: 0
+    spawnMode: 0
+    spawnRadius: 8
+    groundSnap: 1
+  borrowedMoves:
+  - elementID: wind
+    clonePrefab: {fileID: 724858005814169574, guid: 014780f23b4a38f44ad8e4c1afa2287f, type: 3}
+    moves:
+    - moveName: Wind Cyclone
+      movePrefab: {fileID: 1918859812538185499, guid: 53f5536c5d5a28844b7e19db07107691, type: 3}
+      cooldown: 10
+      windup: 2
+      nextReadyTime: 0
+      spawnMode: 2
+      spawnRadius: 8
+      groundSnap: 1
+    - moveName: Hurricane strike
+      movePrefab: {fileID: 7302420950697979121, guid: 9ee58d4768096714dbd95256a2162274, type: 3}
+      cooldown: 15
+      windup: 3
+      nextReadyTime: 0
+      spawnMode: 0
+      spawnRadius: 8
+      groundSnap: 0
+  - elementID: water
+    clonePrefab: {fileID: 946512068887701893, guid: 1512e63f9cc712d4a9eeef6ecabd143e, type: 3}
+    moves:
+    - moveName: Acid Waves
+      movePrefab: {fileID: 4176960486623325862, guid: 96bad36815b0915439e53eaac4f594fb, type: 3}
+      cooldown: 15
+      windup: 2
+      nextReadyTime: 0
+      spawnMode: 0
+      spawnRadius: 8
+      groundSnap: 1
+    - moveName: Hydro Snipe
+      movePrefab: {fileID: 2023191631215308725, guid: dbfb88513f71c98499dbb4e0fe0d540f, type: 3}
+      cooldown: 10
+      windup: 3
+      nextReadyTime: 0
+      spawnMode: 0
+      spawnRadius: 8
+      groundSnap: 0
+    - moveName: Water Prision
+      movePrefab: {fileID: 6597053348194025021, guid: 8b5e8074ea4a73341ac714013df0d2eb, type: 3}
+      cooldown: 25
+      windup: 5
+      nextReadyTime: 0
+      spawnMode: 1
+      spawnRadius: 8
+      groundSnap: 1
+  - elementID: lightning
+    clonePrefab: {fileID: 9068773034702488708, guid: 4b479cdf9d669e24f803b100fa338a42, type: 3}
+    moves:
+    - moveName: Lightning Strike
+      movePrefab: {fileID: 1282769524237636468, guid: 0b58819187bf5e341a42f365907cf16e, type: 3}
+      cooldown: 15
+      windup: 3
+      nextReadyTime: 0
+      spawnMode: 1
+      spawnRadius: 8
+      groundSnap: 1
+    - moveName: Chain Bolt
+      movePrefab: {fileID: 4035556159917431006, guid: f9ad32b887b3e0b4c9844e767086cab2, type: 3}
+      cooldown: 10
+      windup: 2
+      nextReadyTime: 0
+      spawnMode: 0
+      spawnRadius: 8
+      groundSnap: 0
+  - elementID: ice
+    clonePrefab: {fileID: 5728641152694627548, guid: 450d93921c8bcf4489c4987208597da5, type: 3}
+    moves:
+    - moveName: Blizzard
+      movePrefab: {fileID: 2915092583427576257, guid: bbbe016c8dd3fec4eafb8e055214caca, type: 3}
+      cooldown: 12
+      windup: 2
+      nextReadyTime: 0
+      spawnMode: 0
+      spawnRadius: 8
+      groundSnap: 1
+    - moveName: FrostNova
+      movePrefab: {fileID: 6398284863290551884, guid: 39a4cc59349dede44a09d15cd101e4ae, type: 3}
+      cooldown: 8
+      windup: 2
+      nextReadyTime: 0
+      spawnMode: 2
+      spawnRadius: 8
+      groundSnap: 1
+    - moveName: Frost Prison
+      movePrefab: {fileID: 4369551710845199358, guid: c9c3f64ffe6ef8a46bfea3dfbc2d4274, type: 3}
+      cooldown: 30
+      windup: 5
+      nextReadyTime: 0
+      spawnMode: 0
+      spawnRadius: 8
+      groundSnap: 1
+    - moveName: Ice Spkie
+      movePrefab: {fileID: 4258193783421602794, guid: f25307bad0b92dd448a3245865bae70c, type: 3}
+      cooldown: 8
+      windup: 2
+      nextReadyTime: 0
+      spawnMode: 1
+      spawnRadius: 8
+      groundSnap: 1
+  - elementID: fire
+    clonePrefab: {fileID: 1631267848602813557, guid: 09216392b510d534990cfead63444f19, type: 3}
+    moves:
+    - moveName: Fire
+      movePrefab: {fileID: 8740769985183110282, guid: ddcd9c1b8526b8b4a8428d5e3a7452af, type: 3}
+      cooldown: 7
+      windup: 2
+      nextReadyTime: 0
+      spawnMode: 0
+      spawnRadius: 8
+      groundSnap: 0
+    - moveName: Flame Pillar
+      movePrefab: {fileID: 4053281447291005792, guid: 4c4274398f376a94f88589792b18a4d3, type: 3}
+      cooldown: 15
+      windup: 2
+      nextReadyTime: 0
+      spawnMode: 2
+      spawnRadius: 8
+      groundSnap: 1
+    - moveName: Meteor Impact
+      movePrefab: {fileID: 9150288398472088224, guid: 703237b80d2787844b7ce0de48821666, type: 3}
+      cooldown: 9
+      windup: 3
+      nextReadyTime: 0
+      spawnMode: 2
+      spawnRadius: 8
+      groundSnap: 1
+  - elementID: earth
+    clonePrefab: {fileID: 4349667688304747467, guid: 6243be772bdd7fe40b372f56ef2320c9, type: 3}
+    moves:
+    - moveName: Boulder
+      movePrefab: {fileID: 830308544503859457, guid: 55fa486578ae479409e9d7d9089bda8e, type: 3}
+      cooldown: 8
+      windup: 5
+      nextReadyTime: 0
+      spawnMode: 0
+      spawnRadius: 8
+      groundSnap: 1
+    - moveName: Earth Pillar Prision
+      movePrefab: {fileID: 2431306965026289866, guid: 69736ec33e10c6f4484e848b15bfa36f, type: 3}
+      cooldown: 18
+      windup: 3
+      nextReadyTime: 0
+      spawnMode: 1
+      spawnRadius: 8
+      groundSnap: 1
+    - moveName: Shock Wave
+      movePrefab: {fileID: 3815336754683061016, guid: d1b19d53670cf8f49a2dbcf6e1aa88d4, type: 3}
+      cooldown: 10
+      windup: 2
+      nextReadyTime: 0
+      spawnMode: 0
+      spawnRadius: 8
+      groundSnap: 1
+  onlyOneAtATime: 1
+  sealElementWhenCloneDies: 1
+  unlockPhase2WhenNoElementsLeft: 1
+  minRangeToAct: 3
+  maxRangeToAct: 35
+  postCastRecovery: 0.2
+--- !u!114 &1193715773263954360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaae933b7ec971846940ab7482057071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5500
+  currentHealth: 0
+--- !u!65 &3409934121582483806
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3899858474055809312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e5f5f9270cc2bf4c8453743f4a9b102, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpawn: {fileID: 3821887991613562983}
+  hydroProjectilePrefab: {fileID: 2023191631215308725, guid: dbfb88513f71c98499dbb4e0fe0d540f, type: 3}
+  waterPrisonTelegraph: 0.7
+  waterPrisonDuration: 2.5
+  waterPrisonDamageChunk: 20
+  prisonWarningPrefab: {fileID: 1660716348685406645, guid: be3729e91b6b3834b9d4f33d56c38aaa, type: 3}
+  prisonBubblePrefab: {fileID: 6597053348194025021, guid: 8b5e8074ea4a73341ac714013df0d2eb, type: 3}
+  prisonBubbleYOffset: 1
+  prisonMinionPrefabs: []
+  minionsMin: 2
+  minionsMax: 3
+  spawnRadius: 4
+  globalAttackLock: 0.5
+  hydroSnipeTelegraph: 0.35
+  hydroSnipeProjectileSpeed: 28
+  hydroSnipeProjectileDamage: 12
+  acidTickInterval: 1.2
+  acidTickDamage: 2
+  acidStartDelay: 1.5
+  acidWaveVFXPrefab: {fileID: 4176960486623325862, guid: 96bad36815b0915439e53eaac4f594fb, type: 3}
+  acidWaveVFXSpawnPoint: {fileID: 3821887991613562983}
+  acidVFXLifetime: 1.5
+  acidSpawnAcrossArena: 1
+  acidVFXCount: 16
+  acidArenaVFXRadius: 12
+  arenaCenter: {fileID: 0}
+--- !u!114 &3576887551862601358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e15189117885ca4498fe7b1bc116f6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cyclonePrefab: {fileID: 1918859812538185499, guid: 53f5536c5d5a28844b7e19db07107691, type: 3}
+  hurricanePrefab: {fileID: 7302420950697979121, guid: 9ee58d4768096714dbd95256a2162274, type: 3}
+  cycloneSpawn: {fileID: 3821887991613562983}
+  hurricaneSpawn: {fileID: 3821887991613562983}
+  blowbackForce: 15
+  disorientDurration: 3
+  disorientMoveMultiplier: 1
+  invertControls: 1
+  blowbackRange: 6
+  hurricaneDamage: 8
+  hurricaneSpeed: 10
+  hurricaneCount: 5
+--- !u!114 &3763943577124086947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b62a48e14aa8464885701d282950b02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warningCirclePrefab: {fileID: 5915172570307101127, guid: 8b529aa68b90d9146949498fa708f50f, type: 3}
+  lightningStrikePrefab: {fileID: 1282769524237636468, guid: 0b58819187bf5e341a42f365907cf16e, type: 3}
+  thunderCloudPrefab: {fileID: 2145854708840102310, guid: 18ce867bc29f5e84eb40d8827ad32b5f, type: 3}
+  chainBoltPrefab: {fileID: 4035556159917431006, guid: f9ad32b887b3e0b4c9844e767086cab2, type: 3}
+  strikeTelegrahphTime: 1
+  strikeRadius: 2.5
+  strikeDamage: 15
+  flashStepBehindDistance: 2
+  cloudsToSpawn: 3
+  cloudsSpawnArcRadius: 2
+  cloudsHoverHeight: 2.5
+  chainDelay: 0.8
+  chainDuration: 1.2
+  chainTickRate: 0.2
+  chainDamagePerTick: 6
+  chainRange: 8
+  stormRandomStrikeInterval: 2
+  stormRandomStrikeRadius: 1.7
+  stormRandomStrikeDamage: 10
+--- !u!114 &1285015586574279532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61171d08a03a3fa48a341519d1edb3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  telegraphPrefab: {fileID: 7587211287810714268, guid: d90fa099ac162a8489664d766f77d50b, type: 3}
+  spikePrefab: {fileID: 4258193783421602794, guid: f25307bad0b92dd448a3245865bae70c, type: 3}
+  frostNovaPrefab: {fileID: 6398284863290551884, guid: 39a4cc59349dede44a09d15cd101e4ae, type: 3}
+  prisonPrefab: {fileID: 4369551710845199358, guid: c9c3f64ffe6ef8a46bfea3dfbc2d4274, type: 3}
+  blizzardPrefab: {fileID: 2915092583427576257, guid: bbbe016c8dd3fec4eafb8e055214caca, type: 3}
+  spikesWindup: 0.9
+  novaWindup: 0.6
+  prisonWindup: 0.9
+  spikesCount: 6
+  spikesSpacing: 1.5
+  prisonFreezeSeconds: 2.5
+  blizzardDuration: 10
+--- !u!114 &8486453078206508859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e6a144b55a854c45878437c95b15639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warningCirclePrefab: {fileID: 6264464733166109918, guid: 6c8ec26ce9cbd8f43b1248eafc6aea38, type: 3}
+  flamePillarPrefab: {fileID: 4053281447291005792, guid: 4c4274398f376a94f88589792b18a4d3, type: 3}
+  meteorPrefab: {fileID: 9150288398472088224, guid: 703237b80d2787844b7ce0de48821666, type: 3}
+  fireballProjectilePrefab: {fileID: 8740769985183110282, guid: ddcd9c1b8526b8b4a8428d5e3a7452af, type: 3}
+  dashTrailPrefab: {fileID: 8557636376995987849, guid: 1a6b85e85d2e2024e82676a7667f2931, type: 3}
+  fireballMuzzle: {fileID: 2444003552765469365, guid: 79e9fe3e3034d694cab5a47a3ac3c1f1, type: 3}
+  dashTrailSpawn: {fileID: 0}
+  arenaCenter: {fileID: 0}
+  arenaRadius: 18
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  dashWindup: 0.25
+  dashDuration: 0.35
+  dashSpeed: 25
+  dashDamage: 20
+  dashHitRadius: 2
+  dashSplashRadius: 3
+  dashTrailDuration: 0.25
+  dashTrailtickRate: 0.25
+  dashTrailDamagePerTick: 6
+  pillarsCount: 3
+  pillarRadiusFromPlayer: 4
+  pillarAoERadiuls: 2.2
+  pillarTelegraphTime: 0.8
+  pillarLifetime: 2.2
+  pillarDamagePerTick: 7
+  pillarTickRate: 0.25
+  fireballLifetime: 7
+  fireballSpeed: 35
+  fireballDamage: 40
+  enragedChargeTime: 1.2
+  enragedFireballSpeed: 38
+  enragedFireBallDamage: 45
+  meteorCount: 8
+  meteorTelegraphTime: 0.9
+  meteorSpawnHeight: 20
+  meteorImpactRadius: 2.6
+  meteorImpactDamage: 25
+  meteorFallSpeed: 22
+  baseDamageMultiplier: 1
+--- !u!114 &7283245290409589170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8701404492699908530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8124d4924b8af534c9096ff2577ff727, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warningPrefab: {fileID: 2907870994609509299, guid: e7addc69308717c40880145a685441bd, type: 3}
+  shockwavePrefab: {fileID: 3815336754683061016, guid: d1b19d53670cf8f49a2dbcf6e1aa88d4, type: 3}
+  pillarPrisonPrefab: {fileID: 2431306965026289866, guid: 69736ec33e10c6f4484e848b15bfa36f, type: 3}
+  boulderPrefab: {fileID: 830308544503859457, guid: 55fa486578ae479409e9d7d9089bda8e, type: 3}
+  boulderSpawnPoint: {fileID: 3821887991613562983}
+  slamTelegraph: 1
+  prisonTelegraph: 1
+  boulderTelegraph: 0.6
+  boulderForce: 18
+  boulderUpward: 4
+  snapSpawnsToGround: 1
+  rayCastHeight: 30
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!1 &8860412756253977772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6166740860658938256}
+  m_Layer: 0
+  m_Name: DarkBossEXPORTROOT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6166740860658938256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860412756253977772}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2709117893001652108}
+  - {fileID: 4468170735237579598}
+  m_Father: {fileID: 7863814156759531767}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

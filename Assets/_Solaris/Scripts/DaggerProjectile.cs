@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class DaggerProjectile: MonoBehaviour
 {
-    public float speed = 12f;
+    [SerializeField] private float speed = 12f;
     public int damage = 5;
-    public float lifetime = 5f;
+    [SerializeField] private float lifetime = 5f;
 
     private Transform target;
 
@@ -15,7 +15,7 @@ public class DaggerProjectile: MonoBehaviour
     public void SetTarget(Transform targetTransform)
     {
         target = targetTransform;
-        Debug.Log("Dagger target set to " + (targetTransform ? targetTransform.name : "NULL"));
+        Debug.Log("Dagger target set to " + targetTransform.name);
         //Destroy(gameObject, lifetime);
     }
 
@@ -27,7 +27,8 @@ public class DaggerProjectile: MonoBehaviour
         }
         Vector3 direction = (target.position - transform.position).normalized;
         transform.position += direction * speed * Time.deltaTime;
-        
+        transform.forward = direction;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,10 +43,8 @@ public class DaggerProjectile: MonoBehaviour
         {
             health.TakeDamage(damage);
             Debug.Log("Player hit by dagger for " + damage);
-        }
-        if(other.CompareTag("Player"))
-        {
             Destroy(gameObject);
+            return;
         }
     }
 }

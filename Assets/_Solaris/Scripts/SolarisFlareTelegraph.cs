@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
+
 public class SolarisFlareTelegraph : MonoBehaviour
 {
     public GameObject flareMarkerPrefab;
@@ -10,7 +10,7 @@ public class SolarisFlareTelegraph : MonoBehaviour
     public float warningDuration = 1.5f;
     public float damageDuration = 0.5f;
 
-    public int flareCount = 3;
+    public int flareCount = 5;
     public float radius = 6f;
 
     public void TriggerFlare(Transform playerTransform)

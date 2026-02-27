@@ -6,8 +6,65 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/_Solaris/Scenes/SolarisEncounter.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/StarterQuietTown.unity
+    guid: b59836579aeac994692f2005cf804fab
+  - enabled: 1
+    path: Assets/Scenes/BullManTest.unity
+    guid: bdd416485f97d484fbd44f90320b2d38
+  - enabled: 1
+    path: Assets/_Solaris/Scenes/SolarisFightTest.unity
+    guid: 100e2525223d9824f886ac664d29b0bf
+  - enabled: 1
+    path: Assets/Scenes/RefugeTown.unity
+    guid: 44ceff661f5b79a4d9886950ac48e011
+  - enabled: 1
+    path: Assets/Scenes/OpenWorld.unity
+    guid: d3b40539d45b294429f3fc7cfb7f1c65
+  - enabled: 1
+    path: Assets/_HighWindBoss/Scenes/WindBossEncounter.unity
+    guid: 362a51c3d6fd2054d99067c28f95d7df
+  - enabled: 1
+    path: Assets/_HighWindBoss/Scenes/WindBossFight.unity
+    guid: ad2dc6ac044e85c4fa7ed1ecd0a6ee1e
+  - enabled: 1
+    path: Assets/_HighWaterBoss/Scenes/WaterBossEncounter.unity
+    guid: 8915f1c9404354a4c8f8ea875f903f1b
+  - enabled: 1
+    path: Assets/_HighWaterBoss/Scenes/WaterBossFight.unity
+    guid: 60f06d39f1a830546bdd6bfb9317fb94
+  - enabled: 1
+    path: Assets/_HighLightningBoss/Scenes/LightningBossEncounter.unity
+    guid: c3fe205015ee69842b5befa5382b0fb3
+  - enabled: 1
+    path: Assets/_HighLightningBoss/Scenes/LightningBossFight.unity
+    guid: f7acdc1ca50aa424ca92beedf60e54cf
+  - enabled: 1
+    path: Assets/_HighIceBoss/Scenes/IceBossEncounter.unity
+    guid: 24cca3b45974639448f98074c2fb27f1
+  - enabled: 1
+    path: Assets/_HighIceBoss/Scenes/IceBossFight.unity
+    guid: 9dd259f7b2cf99248acff14181b5dd36
+  - enabled: 1
+    path: Assets/_HighFireBoss/Scenes/FireBossEncounter.unity
+    guid: ee5ed99353c4453408ca0ac9143aee52
+  - enabled: 1
+    path: Assets/_HighFireBoss/Scenes/FireBossFight.unity
+    guid: 6b22c31270a737a409aff8d28db0467e
+  - enabled: 1
+    path: Assets/_HighEarthBoss/Scenes/EarthBossEncounter.unity
+    guid: 25d188a73ea2e084b9f1dd1054257dcf
+  - enabled: 1
+    path: Assets/_HighEarthBoss/Scenes/EarthBossFight.unity
+    guid: 7b0d43628baab184c84ddf01c3a852b5
+  - enabled: 1
+    path: Assets/_HighDarkBoss/Scenes/DarkBossEncounter.unity
+    guid: e5e525bf1d41f9d4792e5176076b0f98
+  - enabled: 1
+    path: Assets/_HighDarkBoss/Scenes/DarkBossFight.unity
+    guid: ec76833b17be95b458a55cee2c8e879e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
