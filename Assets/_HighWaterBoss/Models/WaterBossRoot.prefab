@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1997558292481490356}
   m_Layer: 9
   m_Name: WaterBossRoot
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,6 +149,9 @@ MonoBehaviour:
   acidWaveVFXPrefab: {fileID: 4176960486623325862, guid: 96bad36815b0915439e53eaac4f594fb, type: 3}
   acidWaveVFXSpawnPoint: {fileID: 8258571975531539902}
   acidVFXLifetime: 1.5
+  acidSpawnAcrossArena: 1
+  acidVFXCount: 16
+  acidArenaVFXRadius: 12
 --- !u!1 &3568673297925602684
 GameObject:
   m_ObjectHideFlags: 0

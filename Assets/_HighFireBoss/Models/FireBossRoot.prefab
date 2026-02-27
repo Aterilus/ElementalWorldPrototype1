@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7587896888694367155}
   m_Layer: 0
   m_Name: FireBossRoot
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,7 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  anim: {fileID: 0}
   body: {fileID: 554025535027323784}
   warningCirclePrefab: {fileID: 6264464733166109918, guid: 6c8ec26ce9cbd8f43b1248eafc6aea38, type: 3}
   flamePillarPrefab: {fileID: 4053281447291005792, guid: 4c4274398f376a94f88589792b18a4d3, type: 3}

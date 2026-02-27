@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 1464495278742550890}
   m_Layer: 0
   m_Name: IceBossRoot
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,7 +224,15 @@ MonoBehaviour:
   frostNovaPrefab: {fileID: 6398284863290551884, guid: 39a4cc59349dede44a09d15cd101e4ae, type: 3}
   prisonPrefab: {fileID: 4369551710845199358, guid: c9c3f64ffe6ef8a46bfea3dfbc2d4274, type: 3}
   blizzardPrefab: {fileID: 2915092583427576257, guid: bbbe016c8dd3fec4eafb8e055214caca, type: 3}
-  hp: 100
+  testMode: 1
+  globalDelayBetweenMoves: 0.6
+  spikesWindup: 0.9
+  novaWindup: 0.6
+  prisonWindup: 0.9
+  spikesCount: 6
+  spikesSpacing: 1.5
+  prisonFreezeSeconds: 2.5
+  blizzardDuration: 10
 --- !u!114 &1464495278742550890
 MonoBehaviour:
   m_ObjectHideFlags: 0

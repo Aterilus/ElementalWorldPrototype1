@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3286811362972382587}
   m_Layer: 0
   m_Name: WindBossRoot
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaae933b7ec971846940ab7482057071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 750
+  maxHealth: 10
   currentHealth: 0
 --- !u!114 &6053255977508347198
 MonoBehaviour:

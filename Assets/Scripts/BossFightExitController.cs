@@ -69,7 +69,7 @@ public class BossFightExitController : MonoBehaviour
         SceneManager.LoadScene(openWorldSceneName);
     }
 
-    private void SpawnReturnGate()
+    public void SpawnReturnGate()
     {
         if(spawnGate != null) { return; }
 

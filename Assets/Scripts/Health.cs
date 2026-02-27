@@ -92,6 +92,19 @@ public class Health : MonoBehaviour
             return;
         }
 
+        if (CompareTag("Boss"))
+        {
+            var gateSpawnObj = UnityEngine.Object.FindFirstObjectByType<BossFightExitController>();
+            Debug.Log($"{name} died. Spawning return gate. Found exit controller? {(gateSpawnObj != null)}");
+
+            if (gateSpawnObj != null)
+            {
+                gateSpawnObj.SpawnReturnGate();
+                Destroy(gameObject);
+                return;
+            }
+        }
+
         Debug.Log($"{name} died. No reporter found. Destroying.");
         Destroy(gameObject);
     }

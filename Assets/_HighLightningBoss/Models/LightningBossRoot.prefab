@@ -107,9 +107,10 @@ GameObject:
   - component: {fileID: 5906524034038103803}
   - component: {fileID: 3556944615574969731}
   - component: {fileID: 6448976828644762035}
+  - component: {fileID: 1860431598409741497}
   m_Layer: 0
   m_Name: LightningBossRoot
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,6 +185,27 @@ MonoBehaviour:
   stormRandomStrikeDamage: 10
   baseAttackInterval: 2.5
   phase2AttackInterval: 1.7
+--- !u!65 &1860431598409741497
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9068773034702488708}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3.89, z: 1}
+  m_Center: {x: 0, y: 1.69, z: 0}
 --- !u!1001 &5161460630466804242
 PrefabInstance:
   m_ObjectHideFlags: 0

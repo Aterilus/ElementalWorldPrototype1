@@ -136,6 +136,18 @@ PrefabInstance:
       value: FireBossRoot
       objectReference: {fileID: 0}
     - target: {fileID: 3358201496344838053, guid: 90cc007de7e3ece429f9939cf3e8c1ba, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358201496344838053, guid: 90cc007de7e3ece429f9939cf3e8c1ba, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358201496344838053, guid: 90cc007de7e3ece429f9939cf3e8c1ba, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3358201496344838053, guid: 90cc007de7e3ece429f9939cf3e8c1ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35.1
       objectReference: {fileID: 0}
